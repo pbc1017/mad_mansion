@@ -1,0 +1,50 @@
+.login-help {
+  height: 18px;
+  width: 480px;
+}
+
+.login-help .overlap-group {
+  height: 20px;
+  left: -1px;
+  position: relative;
+  top: -1px;
+  width: 481px;
+}
+
+.login-help .login-additional-msg-instance {
+  border-color: #000000 !important;
+  border-right-style: solid !important;
+  border-right-width: 1px !important;
+  height: 20px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 162px !important;
+}
+
+.login-help .design-component-instance-node {
+  top: 0 !important;
+  width: 160px !important;
+}
+
+.login-help .login-additional-msg-2 {
+  border-color: #000000 !important;
+  border-right-style: solid !important;
+  border-right-width: 1px !important;
+  height: 20px !important;
+  left: 160px !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 162px !important;
+}
+
+.login-help .login-additional-msg-3 {
+  left: 321px !important;
+  position: absolute !important;
+  top: 1px !important;
+  width: 160px !important;
+}
+
+.login-help .login-additional-msg-4 {
+  width: 160px !important;
+}

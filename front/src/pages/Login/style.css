@@ -1,0 +1,35 @@
+.login {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.login .div-2 {
+  background-color: #ffffff;
+  border: 1px none;
+  height: 982px;
+  position: relative;
+  width: 1512px;
+}
+
+.login .login-input-instance {
+  left: 516px !important;
+  position: absolute !important;
+  top: 569px !important;
+}
+
+.login .login-logo {
+  height: 302px;
+  left: 614px;
+  position: absolute;
+  top: 160px;
+  width: 284px;
+}
+
+.login .login-help-instance {
+  left: 516px !important;
+  position: absolute !important;
+  top: 716px !important;
+}

@@ -1,12 +1,13 @@
-.login {
-  align-items: flex-start;
+.login-input {
+  align-items: center;
   display: flex;
   gap: 20px;
+  justify-content: center;
   position: relative;
   width: fit-content;
 }
 
-.login .frame {
+.login-input .IDPW {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -16,13 +17,13 @@
   width: fit-content;
 }
 
-.login .form-input {
+.login-input .form-input {
   height: 42px;
   min-width: 375px;
   position: relative;
 }
 
-.login .div {
+.login-input .div {
   align-items: center;
   display: flex;
   gap: 13px;
@@ -31,7 +32,7 @@
   width: fit-content;
 }
 
-.login .ID {
+.login-input .ID {
   color: #000000;
   font-family: "NanumBarunGothic-Regular", Helvetica;
   font-size: 18px;
@@ -44,7 +45,7 @@
   width: 68px;
 }
 
-.login .input-box {
+.login-input .input-box {
   background-color: #ffffff;
   border: 1px solid;
   border-color: #000000;
@@ -53,25 +54,20 @@
   position: relative;
 }
 
-.login .btn {
+.login-input .login-btn {
   align-items: center;
-  background: linear-gradient(
-      180deg,
-      rgb(87.58, 249.69, 84.27) 0%,
-      rgb(70.18, 239.06, 66.74) 99.99%,
-      rgba(87.58, 249.69, 84.27, 0) 100%
-  );
+  background-color: #ff7d7d;
   display: flex;
   gap: 10px;
   height: 104px;
-  border:none;
+  border: none;
   justify-content: center;
   padding: 33px 13px;
   position: relative;
   width: fit-content;
 }
 
-.login .element {
+.login-input .element {
   color: #000000;
   font-family: "NanumBarunGothic-Regular", Helvetica;
   font-size: 22px;

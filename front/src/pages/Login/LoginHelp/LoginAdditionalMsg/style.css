@@ -1,0 +1,20 @@
+.login-additional-msg {
+  height: 18px;
+  position: relative;
+  width: 171px;
+}
+
+.login-additional-msg .element {
+  color: #000000;
+  font-family: "NanumBarunGothic-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: -1px;
+  white-space: nowrap;
+  width: 171px;
+}
