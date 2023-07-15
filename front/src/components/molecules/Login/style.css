@@ -1,0 +1,85 @@
+.login {
+  align-items: flex-start;
+  display: flex;
+  gap: 20px;
+  position: relative;
+  width: fit-content;
+}
+
+.login .frame {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+}
+
+.login .form-input {
+  height: 42px;
+  min-width: 375px;
+  position: relative;
+}
+
+.login .div {
+  align-items: center;
+  display: flex;
+  gap: 13px;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+}
+
+.login .ID {
+  color: #000000;
+  font-family: "NanumBarunGothic-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: 68px;
+}
+
+.login .input-box {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #000000;
+  height: 42px;
+  min-width: 294px;
+  position: relative;
+}
+
+.login .btn {
+  align-items: center;
+  background: linear-gradient(
+      180deg,
+      rgb(87.58, 249.69, 84.27) 0%,
+      rgb(70.18, 239.06, 66.74) 99.99%,
+      rgba(87.58, 249.69, 84.27, 0) 100%
+  );
+  display: flex;
+  gap: 10px;
+  height: 104px;
+  border:none;
+  justify-content: center;
+  padding: 33px 13px;
+  position: relative;
+  width: fit-content;
+}
+
+.login .element {
+  color: #000000;
+  font-family: "NanumBarunGothic-Regular", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
