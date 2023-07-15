@@ -9,13 +9,20 @@
 .login .div-2 {
   background-color: #ffffff;
   border: 1px none;
+  margin: auto;
+  position: absolute;
   height: 982px;
-  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   width: 1512px;
+  vertical-align: middle;
 }
 
 .login .login-input-instance {
-  left: 516px !important;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
   position: absolute !important;
   top: 569px !important;
 }

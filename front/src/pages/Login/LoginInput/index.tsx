@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './style.css';
+import { serverPost } from 'utils/severPost';
 
 type InputProps = {
   name: string,
@@ -41,13 +42,15 @@ const LoginInput: React.FC<{ className?: string }> = ({ className }) => {
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
+    serverPost("login",{ id: id, password: password }).then(
+        (data: any) => {
+            console.log(data); // JSON data parsed by `data` call
+        }
+    );
     setId('');
     setPassword('');
     setIdPlaceholder('아이디를 입력해주세요');
     setPasswordPlaceholder('비밀번호를 입력해주세요');
-    // 로그인 처리를 여기에 추가하세요.
-
-
     
   };
 
