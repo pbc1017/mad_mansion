@@ -1,18 +1,18 @@
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const express=require('express');
-const axios=require("axios");
-const cheerio=require("cheerio");
+const cors = require('cors');
 const fs=require('fs')
 // const prompt=require('prompt-sync')({singint:true});
 
 var app=express();
 var server=require('http').createServer(app);
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({extended : false}));
 
 app.post('/api/login',async (req,res)=>{
   try{
+    console.log(req.body);
     await client.connect();
     userdata=client.db('Users').collection('person');
     const result=await userdata.find(req.body).toArray();
