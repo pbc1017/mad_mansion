@@ -42,11 +42,19 @@ const LoginInput: React.FC<{ className?: string }> = ({ className }) => {
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
+<<<<<<< Updated upstream
     serverPost("login",{ id: id, password: password }).then(
         (data: any) => {
             console.log(data); // JSON data parsed by `data` call
         }
     );
+=======
+    
+    const regExp = new RegExp(`/^[a-z]+[a-z0-9]{5,19}$/g`);
+ 
+	  if(!regExp.test(id)) return; 
+
+>>>>>>> Stashed changes
     setId('');
     setPassword('');
     setIdPlaceholder('아이디를 입력해주세요');

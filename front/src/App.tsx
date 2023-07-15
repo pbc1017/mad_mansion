@@ -1,11 +1,12 @@
 import React from 'react';
-import {Login} from './pages/Login'
+import { BrowserRouter } from 'react-router-dom';
+import RouteSetup from 'routes/RoutesSetup';
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <BrowserRouter>
+      <RouteSetup/>
+    </BrowserRouter>
   );
 }
 
