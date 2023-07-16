@@ -1,16 +1,17 @@
 import {FC} from 'react'
 import {Link} from 'react-router-dom'
+import {Home} from 'pages/Home'
 
 type HomeProps = {
     title? : string
 }
 
-const Home: FC<HomeProps> = ({title}) => {
+const home: FC<HomeProps> = ({title}) => {
     return (
         <div>
-            <text>Hello</text>
+            <Home/>
         </div>
     )
 };
 
-export default Home;
+export default home;

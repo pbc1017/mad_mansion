@@ -1,0 +1,51 @@
+.card-grid {
+  background-color: #ffffff;
+  height: 352px;
+  position: relative;
+  width: 46vw;
+}
+
+.card-grid .element-4 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  left: 2vw;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 24px;
+}
+
+.card-grid .span {
+  font-weight: 700;
+}
+
+.card-grid .text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.card-grid .frame-6 {
+  align-items: center;
+  display: flex;
+  gap: 1vw;
+  justify-content: center;
+  left: 1vw;
+  position: absolute;
+  top: 61px;
+  width: fit-content;
+}
+
+.card {
+  margin-right:4vw;
+}
+
+.card-grid .card-instance {
+  min-width: 211px !important;
+  position: relative !important;
+  width: unset !important;
+}

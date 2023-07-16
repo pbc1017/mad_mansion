@@ -9,34 +9,27 @@
 .login .div-2 {
   background-color: #ffffff;
   border: 1px none;
-  margin: auto;
-  position: absolute;
-  height: 982px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1512px;
-  vertical-align: middle;
+  height: 100vh;
+  position: relative;
+  width: 100vw;
 }
 
 .login .login-input-instance {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0 auto;
+  left: 34.14vw !important;
   position: absolute !important;
-  top: 569px !important;
+  top: 57.87vh !important;
 }
 
 .login .login-logo {
-  height: 302px;
-  left: 614px;
+  height: 30.65vh;
+  left: 40.65vw;
   position: absolute;
-  top: 160px;
-  width: 284px;
+  top: 16.29vh;
+  width: 18.78vw;
 }
 
 .login .login-help-instance {
-  left: 516px !important;
+  left: 34.14vw !important;
   position: absolute !important;
-  top: 716px !important;
+  top: 72.78vh !important;
 }

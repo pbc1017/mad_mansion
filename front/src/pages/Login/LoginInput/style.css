@@ -1,7 +1,7 @@
 .login-input {
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: 2.59vw;
   justify-content: center;
   position: relative;
   width: fit-content;
@@ -11,22 +11,22 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.23vh;
   justify-content: center;
   position: relative;
   width: fit-content;
 }
 
 .login-input .form-input {
-  height: 42px;
-  min-width: 375px;
+  height: 4.28vh;
+  min-width: 24.8vw;
   position: relative;
 }
 
 .login-input .div {
   align-items: center;
   display: flex;
-  gap: 13px;
+  gap: 1.63vw;
   justify-content: center;
   position: relative;
   width: fit-content;
@@ -35,22 +35,22 @@
 .login-input .ID {
   color: #000000;
   font-family: "NanumBarunGothic-Regular", Helvetica;
-  font-size: 18px;
+  font-size: 1.19vw;
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
   position: relative;
   text-align: center;
   white-space: nowrap;
-  width: 68px;
+  width: 4.51vw;
 }
 
 .login-input .input-box {
   background-color: #ffffff;
-  border: 1px solid;
+  border: 0.07vw solid;
   border-color: #000000;
-  height: 42px;
-  min-width: 294px;
+  height: 4.28vh;
+  min-width: 19.44vw;
   position: relative;
 }
 
@@ -58,11 +58,11 @@
   align-items: center;
   background-color: #ff7d7d;
   display: flex;
-  gap: 10px;
-  height: 104px;
+  gap: 0.66vw;
+  height: 10.59vh;
   border: none;
   justify-content: center;
-  padding: 33px 13px;
+  padding: 2.18vh 0.86vw;
   position: relative;
   width: fit-content;
 }
@@ -70,7 +70,7 @@
 .login-input .element {
   color: #000000;
   font-family: "NanumBarunGothic-Regular", Helvetica;
-  font-size: 22px;
+  font-size: 1.45vw;
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;

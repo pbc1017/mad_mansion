@@ -1,0 +1,115 @@
+.card {
+  background-color: #ffffff;
+  height: 279px;
+  width: 211px;
+}
+
+.card .overlap-group {
+  height: 253px;
+  left: 13px;
+  position: relative;
+  top: 19px;
+  width: 185px;
+}
+
+.card .frame-3 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+}
+
+.card .rectangle {
+  background-color: #d9d9d9;
+  height: 130px;
+  min-width: 177px;
+  position: relative;
+}
+
+.card .frame-4 {
+  align-items: center;
+  display: flex;
+  gap: 19px;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+}
+
+.card .element-2 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.card .element-wrapper {
+  height: 21px;
+  min-width: 47px;
+  position: relative;
+}
+
+.card .element-m {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 17px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: -1px;
+}
+
+.card .element-3 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.card .frame-5 {
+  align-items: center;
+  display: flex;
+  gap: 7px;
+  position: relative;
+  width: 185px;
+}
+
+.card .anonymous-user {
+  height: 24px;
+  min-width: 24px;
+  position: relative;
+}
+
+.card .p {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.card .heart {
+  height: 21px;
+  left: 152px;
+  position: absolute;
+  top: 5px;
+  width: 23px;
+}
