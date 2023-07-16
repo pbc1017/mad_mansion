@@ -2,23 +2,27 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as S from './style';
+import type {Info} from '../../pages/Map/Map'
 
 declare const kakao: any; // for using kakao map sdk
 
+
 // 위치 데이터 type 정의
-interface PositionProps {
+export interface PositionProps {
     title: string;
     latitude: number;
     longitude: number;
+    
 }
 
 export interface KakaoMapProps {
     address?: string;
     positions?: Array<PositionProps>;
     height?: string;
+    setMapInfo: (data: Info) => void;
 }
 
-export function KakaoMap({ address, positions, height = '100%' }: KakaoMapProps): React.ReactElement {
+export function KakaoMap({ address, positions, height = '100%', setMapInfo}: KakaoMapProps): React.ReactElement {
     const kakaoMapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -46,8 +50,24 @@ export function KakaoMap({ address, positions, height = '100%' }: KakaoMapProps)
         }
 
         ps.keywordSearch(address, placesSearchCB);
+        setMapInfo( {swLatLng: {
+                lat: kakaoMap.getBounds().getSouthWest().getLat(),
+                lng: kakaoMap.getBounds().getSouthWest().getLng(),
+              },neLatLng: {
+                lat: kakaoMap.getBounds().getNorthEast().getLat(),
+                lng: kakaoMap.getBounds().getNorthEast().getLng(),
+              },
+            })
+    }, [address]);
 
+    useEffect(()=>{
         if (positions) {
+            const kakaoMapElement = kakaoMapRef.current;
+            const options = {
+                center: new kakao.maps.LatLng(37.566826, 126.9786567),
+                level: 3
+            };
+            const kakaoMap = new kakao.maps.Map(kakaoMapElement, options);
             // 마커 클러스터러를 생성합니다
             var clusterer = new kakao.maps.MarkerClusterer({
                 map: kakaoMap, // 마커들을 클러스터로 관리하고 표시할 지도 객체
@@ -65,7 +85,7 @@ export function KakaoMap({ address, positions, height = '100%' }: KakaoMapProps)
             // 클러스터러에 마커들을 추가합니다
             clusterer.addMarkers(markers);
         }
-    }, [address, positions]);
+    }, [positions]);
 
     return <S.Container ref={kakaoMapRef} height={height} />;
 }

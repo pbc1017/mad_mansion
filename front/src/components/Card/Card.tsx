@@ -6,7 +6,6 @@ import "./style.css";
 
 interface Props {
   className: any;
-  heart: string;
   text: string;
 }
 
