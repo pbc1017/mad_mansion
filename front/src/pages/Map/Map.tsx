@@ -9,19 +9,8 @@ export const Map = (): JSX.Element => {
     <div className="map">
       <div className="div-2">
         <div className="overlap">
-          <div className="ellipse" />
-          <div className="ellipse-2" />
-          <div className="ellipse-3" />
-          <div className="ellipse-4" />
-          <div className="frame-5">
-            <div className="text-wrapper-2">3</div>
-          </div>
-          <div className="frame-6">
-            <div className="text-wrapper-2">4</div>
-          </div>
-          <div className="frame-7">
-            <div className="text-wrapper-2">2</div>
-          </div>
+
+          
           <SearchBar
             iconSearch="/img/icon-search.svg"
           />
