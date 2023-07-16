@@ -1,23 +1,21 @@
 .card {
   background-color: #ffffff;
-  height: 12vw;
-  width: 14vw;
+  height: 30vh;
+  width: 12vw;
 }
 
 .card .overlap-group {
-  height: 253px;
-  left: 13px;
+  height: 17vh;
+  left: 1vw;
   position: relative;
   top: 19px;
-  width: 185px;
+  width: 13vw;
 }
 
 .card .frame-3 {
-  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  justify-content: center;
   left: 0;
   position: absolute;
   top: 0;
@@ -26,16 +24,14 @@
 
 .card .rectangle {
   background-color: #d9d9d9;
-  height: 130px;
-  min-width: 177px;
+  height: 14vh;
+  width: 10vw;
   position: relative;
 }
 
 .card .frame-4 {
-  align-items: center;
   display: flex;
   gap: 19px;
-  justify-content: center;
   position: relative;
   width: fit-content;
 }
@@ -43,7 +39,7 @@
 .card .element-2 {
   color: #000000;
   font-family: "Inter", Helvetica;
-  font-size: 17px;
+  font-size: 1.02vw;
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
@@ -53,15 +49,15 @@
 }
 
 .card .element-wrapper {
-  height: 21px;
-  min-width: 47px;
+  height: 2.13vh;
+  min-width: 2vw;
   position: relative;
 }
 
 .card .element-m {
   color: #000000;
   font-family: "Inter", Helvetica;
-  font-size: 17px;
+  font-size: 1.02vw;
   font-weight: 400;
   left: 0;
   letter-spacing: 0;
@@ -73,7 +69,7 @@
 .card .element-3 {
   color: #000000;
   font-family: "Inter", Helvetica;
-  font-size: 17px;
+  font-size: 1.02vw;
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
@@ -82,25 +78,26 @@
 }
 
 .card .frame-5 {
-  align-items: center;
   display: flex;
   gap: 7px;
   position: relative;
-  width: 185px;
+  width: 12vw;
 }
 
 .card .anonymous-user {
-  height: 24px;
-  min-width: 24px;
+  top: -3px;
+  height: 1.6vw;
+  width: 1.6vw;
   position: relative;
 }
 
 .card .p {
   color: #000000;
   font-family: "Inter", Helvetica;
-  font-size: 14px;
+  font-size: 0.7vw;
   font-weight: 400;
   letter-spacing: 0;
+  top: -1vh;
   line-height: normal;
   position: relative;
   width: fit-content;
@@ -108,8 +105,8 @@
 
 .card .heart {
   height: 21px;
-  left: 152px;
+  left: 8vw;
   position: absolute;
   top: 5px;
-  width: 23px;
+  width: 2vw;
 }

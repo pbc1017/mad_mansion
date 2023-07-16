@@ -1,23 +1,17 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
 import React from "react";
+import userSvg from "assets/images/anonymous_user.svg"
+import heartSvg from "assets/images/heart.svg"
 import "./style.css";
 
 interface Props {
   className: any;
-  anonymousUser: string;
   heart: string;
   text: string;
 }
 
 export const Card = ({
   className,
-  anonymousUser = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user-6.svg",
-  heart = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart-6.svg",
   text = "현재 5명이 룸메 구하는 중",
 }: Props): JSX.Element => {
   return (
@@ -32,15 +26,14 @@ export const Card = ({
             </div>
           </div>
           <div className="element-3">
-            풀옵션, 신축, 리모델링, <br />
-            주방분리
+            풀옵션, 신축, 리모델링, 
           </div>
           <div className="frame-5">
-            <img className="anonymous-user" alt="Anonymous user" src={anonymousUser} />
+            <img className="anonymous-user" alt="Anonymous user" src={userSvg} />
             <p className="p">{text}</p>
           </div>
         </div>
-        <img className="heart" alt="Heart" src={heart} />
+        <img className="heart" alt="Heart" src={heartSvg} />
       </div>
     </div>
   );

@@ -32,16 +32,14 @@
 .card-grid .frame-6 {
   align-items: center;
   display: flex;
-  gap: 4vw;
-  justify-content: center;
+  gap: 3vw;
   left: 1vw;
   position: absolute;
   top: 61px;
-  width: fit-content;
 }
 
 .card-grid .card-instance {
-  min-width: 211px !important;
+  width: 14vw !important;
   position: relative !important;
   width: unset !important;
 }
