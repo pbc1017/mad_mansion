@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { SearchBar } from "../../components/SearchBar";
+import {KakaoMap} from "../../components/KakaoMap"; 
 import "./style.css";
 
 export const Map = (): JSX.Element => {
@@ -9,8 +10,7 @@ export const Map = (): JSX.Element => {
     <div className="map">
       <div className="div-2">
         <div className="overlap">
-
-          
+          <KakaoMap/>
           <SearchBar
             iconSearch="/img/icon-search.svg"
           />
