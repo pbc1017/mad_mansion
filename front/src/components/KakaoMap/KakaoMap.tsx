@@ -22,8 +22,12 @@ export interface KakaoMapProps {
     setMapInfo: (data: Info) => void;
 }
 
+
+
 export function KakaoMap({ address, positions, height = '100%', setMapInfo}: KakaoMapProps): React.ReactElement {
     const kakaoMapRef = useRef<HTMLDivElement>(null);
+    const optionRef = useRef<any>(null);
+    let info : any = null;
 
     useEffect(() => {
         const kakaoMapElement = kakaoMapRef.current;
@@ -34,6 +38,7 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
         const kakaoMap = new kakao.maps.Map(kakaoMapElement, options);
         const ps = new kakao.maps.services.Places();
 
+       
         function placesSearchCB(data: any, status: any, pagination: any) {
             if (status === kakao.maps.services.Status.OK) {
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -49,26 +54,42 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
             }
         }
 
+        optionRef.current = {
+            center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
+            level : kakaoMap.getLevel()
+        };
+        
         ps.keywordSearch(address, placesSearchCB);
-        setMapInfo( {swLatLng: {
+
+
+        kakao.maps.event.addListener(kakaoMap, 'dragend', function() {        
+        // 지도 중심좌표를 얻어옵니다 
+            info = {swLatLng: {
                 lat: kakaoMap.getBounds().getSouthWest().getLat(),
                 lng: kakaoMap.getBounds().getSouthWest().getLng(),
               },neLatLng: {
                 lat: kakaoMap.getBounds().getNorthEast().getLat(),
                 lng: kakaoMap.getBounds().getNorthEast().getLng(),
               },
-            })
+            };
+
+            optionRef.current = {
+            center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
+            level : kakaoMap.getLevel()
+            };
+            setMapInfo(info);
+        });
+        
     }, [address]);
+
 
     useEffect(()=>{
         if (positions) {
             const kakaoMapElement = kakaoMapRef.current;
-            const options = {
-                center: new kakao.maps.LatLng(37.566826, 126.9786567),
-                level: 3
-            };
-            const kakaoMap = new kakao.maps.Map(kakaoMapElement, options);
+            
+            const kakaoMap = new kakao.maps.Map(kakaoMapElement, optionRef.current);
             // 마커 클러스터러를 생성합니다
+            
             var clusterer = new kakao.maps.MarkerClusterer({
                 map: kakaoMap, // 마커들을 클러스터로 관리하고 표시할 지도 객체
                 averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정

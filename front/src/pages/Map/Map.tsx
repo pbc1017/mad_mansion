@@ -26,10 +26,11 @@ export interface MapProps {
 
 export const Map = ({address}: MapProps): JSX.Element => {
 
-  let positions : any;
   const [info, setInfo] = useState<Info>();
+  const [positions, setPositions] = useState<any>();
   const handleSetInfo = useCallback((data:Info) => {
-    positions =  [
+    //setInfo까지.then()안에 다 넣으면 됨!
+    setPositions([
       {
           "title": "카카오",
           "latitude": 33.450705,
@@ -50,20 +51,17 @@ export const Map = ({address}: MapProps): JSX.Element => {
           "latitude": 33.451393,
           "longitude": 126.570738
       }
-    ];
+    ]);
+    
+    console.log(positions);
     setInfo(data);
   }, []);
-
-  useEffect(()=>{
-    console.log(info);
-  }, [info]);
-
 
   return (
     <div className="map">
       <div className="div-2">
         <div className="overlap">
-          <KakaoMap address = {address? address : "카이스트"} positions = {positions} setMapInfo = {handleSetInfo}/>
+          <KakaoMap address = {address? address : "제주도"} positions = {positions ? positions : ''} setMapInfo = {handleSetInfo}/>
           <SearchBar
             iconSearch={searchSvg}
           />
