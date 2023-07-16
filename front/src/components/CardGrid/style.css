@@ -32,16 +32,12 @@
 .card-grid .frame-6 {
   align-items: center;
   display: flex;
-  gap: 1vw;
+  gap: 4vw;
   justify-content: center;
   left: 1vw;
   position: absolute;
   top: 61px;
   width: fit-content;
-}
-
-.card {
-  margin-right:4vw;
 }
 
 .card-grid .card-instance {

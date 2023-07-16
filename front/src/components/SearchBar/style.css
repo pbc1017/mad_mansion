@@ -3,14 +3,14 @@
   background-color: #ffffff;
   display: flex;
   gap: 24px;
-  padding: 18px 13px;
+  padding: 0px 13px;
   position: relative;
   width: 87vw;
 }
 
 .search-bar .icon-search {
-  height: 46px;
-  min-width: 44px;
+  height: 30px;
+  min-width: 30px;
   position: relative;
 }
 
