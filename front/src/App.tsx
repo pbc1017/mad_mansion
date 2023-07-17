@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import RouteSetup from 'routes/RoutesSetup';
+import { LoginProvider } from 'contexts/LoginContext';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <RouteSetup/>
-    </BrowserRouter>
+    <LoginProvider>
+      <BrowserRouter>
+        <RouteSetup/>
+      </BrowserRouter>
+    </LoginProvider>
   );
 }
 

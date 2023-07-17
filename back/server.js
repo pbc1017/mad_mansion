@@ -14,7 +14,7 @@ app.post('/api/login',async (req,res)=>{
   try{
     console.log(req.body);
     await client.connect();
-    userdata=client.db('Users').collection('person');
+    userdata=client.db('User').collection('user');
     const result=await userdata.find(req.body).toArray();
     if(result.length>0)
     {
@@ -36,7 +36,7 @@ server.listen(80,main);
 
 //DB CODE
 
-const uri = "mongodb+srv://gloveman50:zohCzGt3lh6icZKl@clustermad.qjzy8y9.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://knsol2:1017@cluster0.ussb1gv.mongodb.net/?retryWrites=true&w=majority";
 //api key E2kpU7xTXiQrNi6WEWE6p1gNFC6dCpd4ZcMEuWHgsn0NHyc86dB3pGVSSwWED7Uz
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version

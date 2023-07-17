@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './style.css';
 import { serverPost } from 'utils/severPost';
+import { useLogin } from 'contexts/LoginContext';
+import { useNavigate } from 'react-router-dom';
 
 type InputProps = {
   name: string,
@@ -40,19 +42,28 @@ const LoginInput: React.FC<{ className?: string }> = ({ className }) => {
     }
   };
 
+  const { setUserId } = useLogin();
+  const navigate = useNavigate(); // 네비게이션 함수 가져오기
+
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
 
-    serverPost("login",{ id: id, password: password }).then(
-        (data: any) => {
-            console.log(data); // JSON data parsed by `data` call
+    serverPost("login", { id: id, password: password }).then((data: any) => {
+        // data.id 가 존재하는 경우에만 로그인을 수행
+        if (data.id) {
+            setUserId(data.id);  // 컨텍스트의 상태 변경
+            console.log("로그인 성공");
+            window.localStorage.setItem('userId', data.id);
+            navigate('/');  // 홈페이지로 이동
+        } else {
+            console.log("로그인 실패");
         }
-    );
+    });
+
     setId('');
     setPassword('');
     setIdPlaceholder('아이디를 입력해주세요');
     setPasswordPlaceholder('비밀번호를 입력해주세요');
-    
   };
 
   return (

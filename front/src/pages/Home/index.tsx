@@ -1,11 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Card } from "components/Card";
 import { CardGrid } from "components/CardGrid";
 import { Header } from "components/Header";
 import { SearchBar } from "components/SearchBar";
+import { useLogin } from "contexts/LoginContext";
 import "./style.css";
 
 export const Home = (): JSX.Element => {
+
+  const { setUserId } = useLogin();
+
+  useEffect(() => {
+    const userId = window.localStorage.getItem('userId');
+    if (userId) {
+      setUserId(userId);
+    }
+  }, [setUserId]);
+
   return (
     <div className="home">
       <div className="frame-wrapper">

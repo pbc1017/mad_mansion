@@ -7,7 +7,7 @@ import {PositionProps} from "../../components/KakaoMap/KakaoMap"
 import "./style.css";
 import logoSvg from "assets/images/logo.svg"
 import searchSvg from "assets/images/search.svg"
-import { number } from "prop-types";
+import { useLogin } from "contexts/LoginContext";
 
 export type Info = {
   swLatLng :{
@@ -25,6 +25,15 @@ export interface MapProps {
 }
 
 export const Map = ({addressProp}: MapProps): JSX.Element => {
+
+  const { setUserId } = useLogin();
+
+  useEffect(() => {
+    const userId = window.localStorage.getItem('userId');
+    if (userId) {
+      setUserId(userId);
+    }
+  }, [setUserId]);
 
   const [info, setInfo] = useState<Info>();
   const [positions, setPositions] = useState<any>();
