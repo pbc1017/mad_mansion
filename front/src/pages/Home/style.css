@@ -177,7 +177,7 @@ html, body {margin: 0px; padding: 0px;}
   left: 3vw;
   position: relative;
   top: 43px;
-  width: 89vw;
+  width: 94vw;
 }
 
 .home .flex-container-2 {
@@ -225,6 +225,28 @@ html, body {margin: 0px; padding: 0px;}
   align-items: center;
   align-self: stretch;
   display: flex;
+  padding: 20px;
+  background: #ffffff;
+  width: 86vw;
   gap: 24px;
   position: relative;
+}
+
+.home .image {
+  height: 298px;
+  width: 94vw;
+  object-fit: cover;
+  left: 0;
+  position: absolute;
+  top: 0;
+  }
+  
+.home .img {
+  height: 298px;
+  width: 94vw;
+  left: 0;
+  position: absolute;
+  top: 0;
+  background-image: url('../../assets/images/background.svg');
+  background-size: cover; 
 }

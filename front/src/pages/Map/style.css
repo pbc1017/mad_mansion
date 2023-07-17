@@ -42,6 +42,7 @@ html, body {margin: 0px; padding: 0px;}
 
 .map .search-bar {
   height: 50px !important;
+  width: 87vw;
   left: 6vw !important;
   position: absolute !important;
   top: 30px; /* Adjusted to match the top position of overlap */

@@ -4,6 +4,8 @@ import { CardGrid } from "components/CardGrid";
 import { Header } from "components/Header";
 import { SearchBar } from "components/SearchBar";
 import { useLogin } from "contexts/LoginContext";
+import backgroundPng from "assets/images/background.png";
+import backgroundSvg from "assets/images/background.svg";
 import "./style.css";
 
 export const Home = (): JSX.Element => {
@@ -28,6 +30,8 @@ export const Home = (): JSX.Element => {
             />
             <div className="search-tab">
               <div className="overlap-2">
+              <img className="image" alt="Image" src={backgroundPng} />
+              <div className="img" />
                 <div className="frame-10">
                   <div className="flex-container-2">
                     <div className="text-2">
