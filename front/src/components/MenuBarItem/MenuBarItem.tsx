@@ -4,6 +4,7 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import PropTypes from "prop-types";
+import { useNavigate } from 'react-router-dom';
 import React from "react";
 import "./style.css";
 
@@ -14,9 +15,28 @@ interface Props {
 }
 
 export const MenuBarItem = ({ className, elementClassName, text = "지도" }: Props): JSX.Element => {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    switch(text) {
+      case '지도':
+        navigate('/map');
+        break;
+      case '관심 목록':
+        navigate('/wishlist');
+        break;
+      case '내가 신청한 방':
+        navigate('/applyroom');
+        break;
+      case '마이 페이지':
+        navigate('/mypage');
+        break;
+      default:
+        break;
+    }
+  }
   return (
     <div className={`menu-bar-item ${className}`}>
-      <div className={`element ${elementClassName}`}>{text}</div>
+      <div className={`element ${elementClassName}`} onClick={handleButtonClick}>{text}</div>
     </div>
   );
 };

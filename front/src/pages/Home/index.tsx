@@ -4,6 +4,7 @@ import { CardGrid } from "components/CardGrid";
 import { Header } from "components/Header";
 import { SearchBar } from "components/SearchBar";
 import { useLogin } from "contexts/LoginContext";
+import { useNavigate } from 'react-router-dom';
 import backgroundPng from "assets/images/background.png";
 import backgroundSvg from "assets/images/background.svg";
 import "./style.css";
@@ -18,6 +19,12 @@ export const Home = (): JSX.Element => {
       setUserId(userId);
     }
   }, [setUserId]);
+
+  const navigate = useNavigate();
+
+  const handleSearchMessage = (data: string) => {
+    navigate(`/map?query=${encodeURIComponent(data)}`);
+  }
 
   return (
     <div className="home">
@@ -46,7 +53,7 @@ export const Home = (): JSX.Element => {
                     </div>
                   </div>
                   <div className="search-bar-wrapper">
-                    <SearchBar iconSearch="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-1.svg" handleSearchMessage = {(data:string) => {}} />
+                    <SearchBar iconSearch="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-1.svg" handleSearchMessage={handleSearchMessage} />
                   </div>
                 </div>
               </div>

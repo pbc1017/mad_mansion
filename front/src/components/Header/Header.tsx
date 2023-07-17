@@ -8,7 +8,7 @@ import React from "react";
 import { LoginButton } from "../LoginButton";
 import { MenuBarItem } from "../MenuBarItem";
 import { useLogin } from "contexts/LoginContext";
-import { LoginProvider } from "contexts/LoginContext";
+import { useNavigate } from 'react-router-dom';
 import "./style.css";
 
 interface Props {
@@ -21,9 +21,13 @@ export const Header = ({
   loginLogo = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/login-logo-1.svg",
 }: Props): JSX.Element => {
   const { userId } = useLogin();
+  const navigate = useNavigate();
+  const handleHomeClick = () => {
+    navigate('/');
+  }
   return (
     <div className={`header ${className}`}>
-      <img className="login-logo" alt="Login logo" src={loginLogo} />
+      <img className="login-logo" alt="Login logo" src={loginLogo} onClick={handleHomeClick} />
       <div className="div">
         <MenuBarItem elementClassName=""className="menu-bar-item-instance" text="지도" />
         <MenuBarItem

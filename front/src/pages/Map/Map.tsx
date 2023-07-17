@@ -8,6 +8,7 @@ import "./style.css";
 import logoSvg from "assets/images/logo.svg"
 import searchSvg from "assets/images/search.svg"
 import { useLogin } from "contexts/LoginContext";
+import { useLocation } from 'react-router-dom';
 
 export type Info = {
   swLatLng :{

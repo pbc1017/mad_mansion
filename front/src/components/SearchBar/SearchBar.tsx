@@ -1,23 +1,26 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
-import React, {useState, useRef} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import "./style.css";
 
 interface Props {
   iconSearch: string;
   handleSearchMessage: (data: string) => void;
+  searchAddress?: string;
 }
 
 export const SearchBar = ({
   iconSearch = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-2.svg",
-handleSearchMessage}: Props): JSX.Element => {
-
-  const [text, setText] = useState<string>('');
+  handleSearchMessage, 
+  searchAddress
+}: Props): JSX.Element => {
+  const [text, setText] = useState<string>(searchAddress || '');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if(searchAddress) {
+      setText(searchAddress);
+    }
+  }, [searchAddress])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -29,16 +32,16 @@ handleSearchMessage}: Props): JSX.Element => {
     }
   };
 
-
   return (
     <div className="search-bar">
       <img className="icon-search" alt="Icon search" src={iconSearch} />
       <input 
         className="element-5"  
-        placeholder = "찾으려는 지역, 동, 지하철역을 검색하세요"
+        placeholder="찾으려는 지역, 동, 지하철역을 검색하세요"
+        value={text}
         onChange={onChange}
         onKeyDownCapture={handleKeyPress}
-        />
+      />
     </div>
   );
 };
