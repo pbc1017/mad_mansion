@@ -1,0 +1,42 @@
+.chat-header {
+  height: 47px;
+  width: 278px;
+}
+
+.chat-header .frame {
+  align-items: center;
+  background-color: #ff7d7d;
+  border-radius: 20px 20px 0px 0px;
+  display: flex;
+  gap: 10px;
+  height: 35px;
+  justify-content: center;
+  left: 0;
+  overflow: hidden;
+  padding: 9px 101px;
+  position: absolute;
+  top: 0;
+  width: 278px;
+}
+
+.chat-header .chat-list {
+  color: #ffffff;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.chat-header .ellipse {
+  background-color: #d9d9d9;
+  border-radius: 6px;
+  height: 12px;
+  left: 19px;
+  position: absolute;
+  top: 12px;
+  width: 12px;
+}

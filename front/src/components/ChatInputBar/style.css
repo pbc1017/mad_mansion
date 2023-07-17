@@ -1,0 +1,21 @@
+.chat-input-bar {
+  background-color: #ffffff;
+  border-radius: 15px;
+  height: 34px;
+  position: relative;
+  width: 261px;
+}
+
+.chat-input-bar .element {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  height: 32px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 1px;
+  width: 197px;
+}
