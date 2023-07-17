@@ -15,7 +15,7 @@
 }
 
 .search-bar .element-5 {
-  color: #939393;
+  color: black;
   font-family: "NanumBarunGothic-Light", Helvetica;
   font-size: 23px;
   font-weight: 300;
@@ -24,4 +24,7 @@
   line-height: normal;
   position: relative;
   width: 1230px;
+  border: none;
+  outline: none;
 }
+

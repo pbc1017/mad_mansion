@@ -4,20 +4,41 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import PropTypes from "prop-types";
-import React from "react";
+import React, {useState, useRef} from "react";
 import "./style.css";
 
 interface Props {
   iconSearch: string;
+  handleSearchMessage: (data: string) => void;
 }
 
 export const SearchBar = ({
   iconSearch = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-2.svg",
-}: Props): JSX.Element => {
+handleSearchMessage}: Props): JSX.Element => {
+
+  const [text, setText] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchMessage(text);
+    }
+  };
+
+
   return (
     <div className="search-bar">
       <img className="icon-search" alt="Icon search" src={iconSearch} />
-      <p className="element-5">찾으려는 지역, 동, 지하철역을 검색하세요</p>
+      <input 
+        className="element-5"  
+        placeholder = "찾으려는 지역, 동, 지하철역을 검색하세요"
+        onChange={onChange}
+        onKeyDownCapture={handleKeyPress}
+        />
     </div>
   );
 };

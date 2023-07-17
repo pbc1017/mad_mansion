@@ -21,15 +21,22 @@ export type Info = {
 }
 
 export interface MapProps {
-    address: string
+    addressProp: string
 }
 
-export const Map = ({address}: MapProps): JSX.Element => {
+export const Map = ({addressProp}: MapProps): JSX.Element => {
 
   const [info, setInfo] = useState<Info>();
   const [positions, setPositions] = useState<any>();
+  const [address, setAddresss] = useState<string>(addressProp);
+  
   const handleSetInfo = useCallback((data:Info) => {
+    setInfo(data);
     //setInfo까지.then()안에 다 넣으면 됨!
+  }, []);
+
+  useEffect(()=>{
+    
     setPositions([
       {
           "title": "카카오",
@@ -52,9 +59,11 @@ export const Map = ({address}: MapProps): JSX.Element => {
           "longitude": 126.570738
       }
     ]);
-    
-    console.log(positions);
-    setInfo(data);
+
+  }, [info]);
+
+  const handleSetAddress = useCallback((data : string) => {
+      setAddresss(data)
   }, []);
 
   return (
@@ -64,6 +73,7 @@ export const Map = ({address}: MapProps): JSX.Element => {
           <KakaoMap address = {address? address : "제주도"} positions = {positions ? positions : ''} setMapInfo = {handleSetInfo}/>
           <SearchBar
             iconSearch={searchSvg}
+            handleSearchMessage={handleSetAddress}
           />
           <div className="frame-8">
             <Card className="card-instance"text = ""/>

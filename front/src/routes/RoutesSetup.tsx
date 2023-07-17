@@ -8,7 +8,7 @@ export default function RouteSetup() {
         <Routes>
             <Route path= "/" element = {<Home/>}/>
             <Route path= "/login" element = {<Login/>}/>
-            <Route path= "/map" element = {<Map address='' />}/>
+            <Route path= "/map" element = {<Map addressProp='' />}/>
         </Routes>
     )
 }

@@ -32,9 +32,10 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
     useEffect(() => {
         const kakaoMapElement = kakaoMapRef.current;
         const options = {
-            center: new kakao.maps.LatLng(37.566826, 126.9786567),
+            center: new kakao.maps.LatLng(37.566826, 160.9786567),
             level: 3
         };
+        optionRef.current = options;
         const kakaoMap = new kakao.maps.Map(kakaoMapElement, options);
         const ps = new kakao.maps.services.Places();
 
@@ -51,17 +52,29 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
 
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                 kakaoMap.setBounds(bounds);
+                optionRef.current = {
+                center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
+                level : kakaoMap.getLevel()
+                };
+                info = {swLatLng: {
+                lat: kakaoMap.getBounds().getSouthWest().getLat(),
+                lng: kakaoMap.getBounds().getSouthWest().getLng(),
+                },
+                neLatLng: {
+                lat: kakaoMap.getBounds().getNorthEast().getLat(),
+                lng: kakaoMap.getBounds().getNorthEast().getLng(),
+                },
+                };
+
+                console.log(optionRef.current.center);
+                setMapInfo(info);
             }
         }
 
-        optionRef.current = {
-            center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
-            level : kakaoMap.getLevel()
-        };
         
         ps.keywordSearch(address, placesSearchCB);
-
-
+        
+        
         kakao.maps.event.addListener(kakaoMap, 'dragend', function() {        
         // 지도 중심좌표를 얻어옵니다 
             info = {swLatLng: {
@@ -77,6 +90,8 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
             center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
             level : kakaoMap.getLevel()
             };
+
+            console.log(optionRef.current);
             setMapInfo(info);
         });
         

@@ -31,7 +31,7 @@ export const Home = (): JSX.Element => {
                     </div>
                   </div>
                   <div className="search-bar-wrapper">
-                    <SearchBar iconSearch="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-1.svg" />
+                    <SearchBar iconSearch="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-1.svg" handleSearchMessage = {(data:string) => {}} />
                   </div>
                 </div>
               </div>
