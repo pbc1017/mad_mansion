@@ -27,10 +27,29 @@ app.post('/api/login',async (req,res)=>{
   }
   finally
   {
-    client.close();
+    // client.close();
   }
 
 });
+
+app.post('/api/map',async (req,res)=>{
+  try {
+    console.log(req.body);
+    await client.connect();
+    house=client.db('House').collection('house');
+    const info = req.body;
+    const result=await 
+    house.find({
+      $and: [
+        {latitude: { $gte: info.swLatLng.lat, $lte: info.neLatLng.lat }},
+        {longitude: { $gte: info.swLatLng.lng, $lte: info.neLatLng.lng }}
+      ]}).toArray();
+    res.json(result);
+  }
+  finally {
+    // client.close();
+  }
+})
 
 server.listen(80,main);
 

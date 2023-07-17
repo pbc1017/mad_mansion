@@ -1,5 +1,6 @@
+// SearchBar.tsx
 import PropTypes from "prop-types";
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import "./style.css";
 
 interface Props {
@@ -11,16 +12,10 @@ interface Props {
 export const SearchBar = ({
   iconSearch = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/icon-search-2.svg",
   handleSearchMessage, 
-  searchAddress
-}: Props): JSX.Element => {
+  searchAddress}: Props): JSX.Element => {
+
   const [text, setText] = useState<string>(searchAddress || '');
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if(searchAddress) {
-      setText(searchAddress);
-    }
-  }, [searchAddress])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -31,6 +26,10 @@ export const SearchBar = ({
       handleSearchMessage(text);
     }
   };
+
+  useEffect(() => {
+    setText(searchAddress || '');
+  }, [searchAddress]);
 
   return (
     <div className="search-bar">

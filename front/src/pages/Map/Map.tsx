@@ -3,6 +3,7 @@ import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { SearchBar } from "../../components/SearchBar";
 import {KakaoMap} from "../../components/KakaoMap"; 
+import { serverPost } from 'utils/severPost';
 import {PositionProps} from "../../components/KakaoMap/KakaoMap"
 import "./style.css";
 import logoSvg from "assets/images/logo.svg"
@@ -39,6 +40,8 @@ export const Map = ({addressProp}: MapProps): JSX.Element => {
   const [info, setInfo] = useState<Info>();
   const [positions, setPositions] = useState<any>();
   const [address, setAddresss] = useState<string>(addressProp);
+  const { search } = useLocation();
+  const query = new URLSearchParams(search).get('query');
   
   const handleSetInfo = useCallback((data:Info) => {
     setInfo(data);
@@ -46,45 +49,38 @@ export const Map = ({addressProp}: MapProps): JSX.Element => {
   }, []);
 
   useEffect(()=>{
-    
-    setPositions([
-      {
-          "title": "카카오",
-          "latitude": 33.450705,
-          "longitude": 126.570677
-      },
-      {
-          "title": "생태연못",
-          "latitude": 33.450936,
-          "longitude": 126.569477
-      },
-      {
-          "title": "텃밭",
-          "latitude": 33.450879,
-          "longitude": 126.56994
-      },
-      {
-          "title": "근린공원",
-          "latitude": 33.451393,
-          "longitude": 126.570738
-      }
-    ]);
+    console.log(info);
+    if(info) {
+      serverPost("map", info).then((data: any) => {
+        // data가 정의되어 있는지 확인
+        if(data) {
+          setPositions(data.map((item: { address: any; latitude: any; longitude: any; }) => ({
+            title: item.address,
+            latitude: item.latitude,
+            longitude: item.longitude,
+          }))); 
+        }
+      });
+    }
+}, [info]);
 
-  }, [info]);
 
   const handleSetAddress = useCallback((data : string) => {
-      setAddresss(data)
+    setAddresss(data)
   }, []);
+
+  useEffect(() => {
+    if (query) {
+      handleSetAddress(decodeURIComponent(query));
+    }
+  }, [query, handleSetAddress]);
 
   return (
     <div className="map">
       <div className="div-2">
         <div className="overlap">
-          <KakaoMap address = {address? address : "제주도"} positions = {positions ? positions : ''} setMapInfo = {handleSetInfo}/>
-          <SearchBar
-            iconSearch={searchSvg}
-            handleSearchMessage={handleSetAddress}
-          />
+          <KakaoMap address = {address? address : "카이스트 IT융합빌딩"} positions = {positions ? positions : ''} setMapInfo = {handleSetInfo}/>
+          <SearchBar iconSearch={searchSvg} handleSearchMessage={handleSetAddress} searchAddress={query ? decodeURIComponent(query) : ''} />
           <div className="frame-8">
             <Card className="card-instance"text = ""/>
             <Card className="card-instance" text = "" />

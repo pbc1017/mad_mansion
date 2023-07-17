@@ -26,17 +26,17 @@ export interface KakaoMapProps {
 
 export function KakaoMap({ address, positions, height = '100%', setMapInfo}: KakaoMapProps): React.ReactElement {
     const kakaoMapRef = useRef<HTMLDivElement>(null);
+    const kakaoMapRealRef = useRef<any>(null);
     const optionRef = useRef<any>(null);
     let info : any = null;
 
     useEffect(() => {
         const kakaoMapElement = kakaoMapRef.current;
-        const options = {
+        optionRef.current = optionRef.current ? optionRef.current : {
             center: new kakao.maps.LatLng(37.566826, 160.9786567),
             level: 3
         };
-        optionRef.current = options;
-        const kakaoMap = new kakao.maps.Map(kakaoMapElement, options);
+        kakaoMapRealRef.current = kakaoMapRealRef.current? kakaoMapRealRef.current : new kakao.maps.Map(kakaoMapElement, optionRef.current);
         const ps = new kakao.maps.services.Places();
 
        
@@ -51,18 +51,18 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
                 }
 
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-                kakaoMap.setBounds(bounds);
+                kakaoMapRealRef.current.setBounds(bounds);
                 optionRef.current = {
-                center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
-                level : kakaoMap.getLevel()
+                center: new kakao.maps.LatLng(kakaoMapRealRef.current.getCenter().getLat(), kakaoMapRealRef.current.getCenter().getLng()),
+                level : kakaoMapRealRef.current.getLevel()
                 };
                 info = {swLatLng: {
-                lat: kakaoMap.getBounds().getSouthWest().getLat(),
-                lng: kakaoMap.getBounds().getSouthWest().getLng(),
+                lat: kakaoMapRealRef.current.getBounds().getSouthWest().getLat(),
+                lng: kakaoMapRealRef.current.getBounds().getSouthWest().getLng(),
                 },
                 neLatLng: {
-                lat: kakaoMap.getBounds().getNorthEast().getLat(),
-                lng: kakaoMap.getBounds().getNorthEast().getLng(),
+                lat: kakaoMapRealRef.current.getBounds().getNorthEast().getLat(),
+                lng: kakaoMapRealRef.current.getBounds().getNorthEast().getLng(),
                 },
                 };
 
@@ -75,20 +75,20 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
         ps.keywordSearch(address, placesSearchCB);
         
         
-        kakao.maps.event.addListener(kakaoMap, 'dragend', function() {        
+        kakao.maps.event.addListener(kakaoMapRealRef.current, 'dragend', function() {        
         // 지도 중심좌표를 얻어옵니다 
             info = {swLatLng: {
-                lat: kakaoMap.getBounds().getSouthWest().getLat(),
-                lng: kakaoMap.getBounds().getSouthWest().getLng(),
+                lat: kakaoMapRealRef.current.getBounds().getSouthWest().getLat(),
+                lng: kakaoMapRealRef.current.getBounds().getSouthWest().getLng(),
               },neLatLng: {
-                lat: kakaoMap.getBounds().getNorthEast().getLat(),
-                lng: kakaoMap.getBounds().getNorthEast().getLng(),
+                lat: kakaoMapRealRef.current.getBounds().getNorthEast().getLat(),
+                lng: kakaoMapRealRef.current.getBounds().getNorthEast().getLng(),
               },
             };
 
             optionRef.current = {
-            center: new kakao.maps.LatLng(kakaoMap.getCenter().getLat(), kakaoMap.getCenter().getLng()),
-            level : kakaoMap.getLevel()
+            center: new kakao.maps.LatLng(kakaoMapRealRef.current.getCenter().getLat(), kakaoMapRealRef.current.getCenter().getLng()),
+            level : kakaoMapRealRef.current.getLevel()
             };
 
             console.log(optionRef.current);
@@ -102,13 +102,13 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
         if (positions) {
             const kakaoMapElement = kakaoMapRef.current;
             
-            const kakaoMap = new kakao.maps.Map(kakaoMapElement, optionRef.current);
+            kakaoMapRealRef.current = kakaoMapRealRef.current ? kakaoMapRealRef.current : new kakao.maps.Map(kakaoMapElement, optionRef.current);
             // 마커 클러스터러를 생성합니다
             
             var clusterer = new kakao.maps.MarkerClusterer({
-                map: kakaoMap, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+                map: kakaoMapRealRef.current, // 마커들을 클러스터로 관리하고 표시할 지도 객체
                 averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-                minLevel: 8 // 클러스터 할 최소 지도 레벨
+                minLevel: 0 // 클러스터 할 최소 지도 레벨
             });
 
             // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
