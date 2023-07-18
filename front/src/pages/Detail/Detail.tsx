@@ -72,16 +72,15 @@ export const Detail = ({placeId} : DetailProps): JSX.Element => {
                 <h1 className="h-1">룸메이트 구합니다</h1>
                 <img className="add-button" alt="Add button" onClick = {handleOpenAddModal} src={addSvg} />
                  {isPostAddingModalOpen && (
-                    <PostingAddModal onClose={handleCloseAddModal}>
-                      <h2>Modal Content</h2>
+                    <PostingAddModal onClose={handleCloseAddModal}/>
+                    )
+                 }
                   {postingToView && (
                     <PostingViewModal onClose={handleCloseAddModal} Posting = {postingToView}>
                       <h2>Modal Content</h2>
                       <p>This is a simple modal example.</p>
                     </PostingViewModal>
-                  )}    <p>This is a simple modal example.</p>
-                    </PostingAddModal>
-                  )}
+                  )}    
                 <div className="frame-6">
                   {postings ? postings.map((posting: Posting, index:number) => (
                     <RoomInfo key={index} onClickSendPosting={handlePostingToView} className="room-info-instance" Posting={posting} />
