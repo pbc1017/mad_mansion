@@ -37,16 +37,15 @@ export const Detail = ({placeId} : DetailProps): JSX.Element => {
   };
   const [postingToView, setPostingToView] = useState<Posting | null>(null);
   
-  const handlePostingToView = () => {
-    setPostingToView(null);
+  const handlePostingToView = (Posting: Posting | null) => {
+    setPostingToView(Posting);
   }
-
 
   useEffect(()=>{
 
-      serverPost("getPostings", { placeId : placeId })
+      serverPost("getPostingsfromHouse", { placeId : placeId })
           .then((data: any) => {
-            console.log(data)
+            console.log(data[0]._id);
             if (data) {
                 setPostings(data);
                   // 홈페이지로 이동
@@ -76,7 +75,7 @@ export const Detail = ({placeId} : DetailProps): JSX.Element => {
                     )
                  }
                   {postingToView && (
-                    <PostingViewModal onClose={handleCloseAddModal} Posting = {postingToView}>
+                    <PostingViewModal onClose={handlePostingToView} Posting = {postingToView}>
                       <h2>Modal Content</h2>
                       <p>This is a simple modal example.</p>
                     </PostingViewModal>

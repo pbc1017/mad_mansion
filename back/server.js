@@ -139,14 +139,20 @@ app.post('/api/map',async (req,res)=>{
   }
 })
 
-app.post('/api/getPostings',async (req,res)=>{
+app.post('/api/getPostingsfromHouse',async (req,res)=>{
   try {
     console.log(req.body);
     await client.connect();
     house=client.db('Postings').collection('postings');
     const info = req.body;
-    const result=await 
+    let result=await 
     house.find({placeId:  info.placeId }).toArray();
+    result = result.map(item => {
+      return {
+        ...item,
+        _id: item._id.toString()
+      }
+    });
     console.log(result);
     res.json(result);
   }
