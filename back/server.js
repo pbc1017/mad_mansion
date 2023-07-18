@@ -298,7 +298,42 @@ app.post('/api/getReceivedApply', async (req, res) => {
   } 
   finally {
     // Close the database connection
-    client.close();
+
+  }
+});
+
+
+app.post('/api/decidingApply', async (req, res) => {
+  try {
+    // Establish a connection to the database
+    await client.connect();
+    
+    // Get the applies collection from the Postings database
+    const Applies = client.db('Postings').collection('applies');
+    
+    // Update the apply with the provided id in the request body
+    const result = await Applies.updateOne(
+      { _id: new ObjectId(req.body.applyId) },
+      { $set: { state: req.body.switch ? 'accepted' : 'denied' } }
+    );
+    
+    console.log(req.body);
+    // If the update operation was successful, return the updated apply
+    if(result.modifiedCount > 0) {
+      const updatedApply = await Applies.findOne({ _id: new ObjectId(req.body.applyId) });
+      res.json(updatedApply);
+    } else {
+      res.status(404).json({ error: 'No apply found with the provided id' });
+    }
+  } 
+  catch (error) {
+    // Log the error and respond with a status code 500 and the error message
+    console.error(error);
+    res.status(500).json({ error: error.toString() });
+  } 
+  finally {
+    // Close the database connection
+    //client.close();
   }
 });
 
