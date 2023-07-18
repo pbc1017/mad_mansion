@@ -114,10 +114,6 @@ export const Detail = (): JSX.Element => {
               <img className="next" alt="Next" src={nextSvg} /> */}
             </img>
             <div className="overlap-group-wrapper">
-              {isPostAddingModalOpen && (
-                <PostingAddModal onClose={handleCloseAddModal}/>
-                )
-              }
                
               <div className="overlap-group">
                 <h1 className="h-1">룸메이트 구합니다</h1>
@@ -264,6 +260,11 @@ export const Detail = (): JSX.Element => {
             <PostingViewModal onClose={handlePostingToView} Posting = {postingToView}/>
           </div>
         )}  
+        {isPostAddingModalOpen && (
+          <div className="modal-container">
+            <PostingAddModal onClose={handleCloseAddModal}/>
+          </div>
+        )}
       </div>
     </div>
   );

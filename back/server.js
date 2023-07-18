@@ -337,6 +337,16 @@ app.post('/api/decidingApply', async (req, res) => {
   }
 });
 
+app.post('/api/getDetail', async (req, res) => {
+  try {
+    await client.connect();
+    Applies=client.db('House').collection('house');
+    let result = await Applies.find(req.body).toArray();
+    res.json(result[0])
+  }
+  finally {}
+})
+
 server.listen(80,main);
 
 //DB CODE
