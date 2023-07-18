@@ -267,6 +267,41 @@ app.post('/api/makePosting', async (req, res) => {
 });
 
 
+app.post('/api/getReceivedApply', async (req, res) => {
+  //   서버  URL:  '/api/getReceivedApply'
+// 요청 방식: POST
+// req.body : {userId : "" }
+// 수행 Postings db의 apply collection의 state가 "waiting" && sender = req.body.userId인 apply들을 검색
+// res : 해당 apply들의 배열을 반환 
+
+
+  try {
+    // Establish a connection to the database
+    await client.connect();
+    
+    // Get the applies collection from the Postings database
+    const Applies = client.db('Postings').collection('applies');
+    
+    // Find all applies that have a state of "waiting" and where the sender equals the userId from the request body
+    const receivedApplies = await Applies.find({ 
+      state: "waiting",
+      sender: req.body.userId 
+    }).toArray();
+
+    // Respond with the array of applies
+    res.json(receivedApplies);
+  } 
+  catch (error) {
+    // Log the error and respond with a status code 500 and the error message
+    console.error(error);
+    res.status(500).json({ error: error.toString() });
+  } 
+  finally {
+    // Close the database connection
+    client.close();
+  }
+});
+
 server.listen(80,main);
 
 //DB CODE
