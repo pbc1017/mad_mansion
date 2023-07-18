@@ -11,7 +11,7 @@ export default function RouteSetup() {
             <Route path= "/" element = {<Home/>}/>
             <Route path= "/login" element = {<Login/>}/>
             <Route path= "/map" element = {<Map addressProp='' />}/>
-            <Route path= "/detail" element = {<Detail/>}/>
+            <Route path= "/detail" element = {<Detail placeId='대전광역시 22'/>}/>
         </Routes>
     )
 }

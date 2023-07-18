@@ -139,6 +139,23 @@ app.post('/api/map',async (req,res)=>{
   }
 })
 
+app.post('/api/getPostings',async (req,res)=>{
+  try {
+    console.log(req.body);
+    await client.connect();
+    house=client.db('Postings').collection('postings');
+    const info = req.body;
+    const result=await 
+    house.find({placeId:  info.placeId }).toArray();
+    console.log(result);
+    res.json(result);
+  }
+  finally {
+    // client.close();
+  }
+})
+
+
 server.listen(80,main);
 
 //DB CODE

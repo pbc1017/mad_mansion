@@ -1,13 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "components/Header";
 import { RoomInfo } from "components/RoomInfo";
 import prevSvg from "assets/images/prev.svg";
 import nextSvg from "assets/images/next.svg";
 import logoSvg from "assets/images/logo.svg";
 import addSvg from "assets/images/add_button.svg";
+import {serverPost} from '../../utils/severPost'
+import PostingAddModal from 'components/PostingAddModal'
+import PostingViewModal from 'components/PostingViewModal'
 import "./style.css";
 
-export const Detail = (): JSX.Element => {
+export type DetailProps = {
+  placeId : string
+}
+export type Posting = {
+  _id : string,
+  maxNum : number,
+  title : string,
+  content : string,
+  writer : string,
+  placeId : string,
+  members : string[]
+}
+export const Detail = ({placeId} : DetailProps): JSX.Element => {
+
+  const [postings, setPostings] = useState<Array<Posting> | null>(null);
+
+  const [isPostAddingModalOpen, setisPostAddingModalOpen] = useState<boolean>(false);
+
+  const handleOpenAddModal = () => {
+    setisPostAddingModalOpen(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setisPostAddingModalOpen(false);
+  };
+  const [postingToView, setPostingToView] = useState<Posting | null>(null);
+  
+  const handlePostingToView = () => {
+    setPostingToView(null);
+  }
+
+
+  useEffect(()=>{
+
+      serverPost("getPostings", { placeId : placeId })
+          .then((data: any) => {
+            console.log(data)
+            if (data) {
+                setPostings(data);
+                  // 홈페이지로 이동
+            } else {
+              console.log("포스팅 실패 혹은 없음")
+            }
+          });
+  },[]);
+
+
   return (
     <div className="detail">
       <div className="frame-wrapper">
@@ -21,14 +70,24 @@ export const Detail = (): JSX.Element => {
             <div className="overlap-group-wrapper">
               <div className="overlap-group">
                 <h1 className="h-1">룸메이트 구합니다</h1>
-                <img className="add-button" alt="Add button" src={addSvg} />
+                <img className="add-button" alt="Add button" onClick = {handleOpenAddModal} src={addSvg} />
+                 {isPostAddingModalOpen && (
+                    <PostingAddModal onClose={handleCloseAddModal}>
+                      <h2>Modal Content</h2>
+                  {postingToView && (
+                    <PostingViewModal onClose={handleCloseAddModal} Posting = {postingToView}>
+                      <h2>Modal Content</h2>
+                      <p>This is a simple modal example.</p>
+                    </PostingViewModal>
+                  )}    <p>This is a simple modal example.</p>
+                    </PostingAddModal>
+                  )}
                 <div className="frame-6">
-                  <RoomInfo className="room-info-instance" />
-                  <RoomInfo className="room-info-instance" />
-                  <RoomInfo className="room-info-instance" />
-                  <RoomInfo className="room-info-instance" />
-                  
+                  {postings ? postings.map((posting: Posting, index:number) => (
+                    <RoomInfo key={index} onClickSendPosting={handlePostingToView} className="room-info-instance" Posting={posting} />
+                  )): null}
                 </div>
+
               </div>
             </div>
           </div>
