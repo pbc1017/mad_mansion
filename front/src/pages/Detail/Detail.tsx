@@ -114,19 +114,15 @@ export const Detail = (): JSX.Element => {
               <img className="next" alt="Next" src={nextSvg} /> */}
             </img>
             <div className="overlap-group-wrapper">
+              {isPostAddingModalOpen && (
+                <PostingAddModal onClose={handleCloseAddModal}/>
+                )
+              }
+               
               <div className="overlap-group">
                 <h1 className="h-1">룸메이트 구합니다</h1>
                 <img className="add-button" alt="Add button" onClick = {handleOpenAddModal} src={addSvg} />
-                 {isPostAddingModalOpen && (
-                    <PostingAddModal onClose={handleCloseAddModal}/>
-                    )
-                 }
-                  {postingToView && (
-                    <PostingViewModal onClose={handlePostingToView} Posting = {postingToView}>
-                      <h2>Modal Content</h2>
-                      <p>This is a simple modal example.</p>
-                    </PostingViewModal>
-                  )}    
+                  
                 <div className="frame-6">
                   {postings ? postings.map((posting: Posting, index:number) => (
                     <RoomInfo key={index} onClickSendPosting={handlePostingToView} className="room-info-instance" Posting={posting} />
@@ -206,6 +202,7 @@ export const Detail = (): JSX.Element => {
                   <div className="text-wrapper-4">2023.07.0{Math.floor(Math.random() * 9)+1}</div>
                 </div>
               </div>
+              
             </div>
           </div>
           <footer className="footer">
@@ -262,6 +259,11 @@ export const Detail = (): JSX.Element => {
             </div>
           </footer>
         </div>
+        {postingToView && (
+          <div className="modal-container">
+            <PostingViewModal onClose={handlePostingToView} Posting = {postingToView}/>
+          </div>
+        )}  
       </div>
     </div>
   );
