@@ -7,7 +7,7 @@ import "./style.css";
 
 export const Login: React.FC = () => {
 
-    const { setUserId } = useLogin();
+    const { setUserProfile } = useLogin();
 
     return (
         <div className="login">

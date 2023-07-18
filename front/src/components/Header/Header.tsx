@@ -20,7 +20,7 @@ export const Header = ({
   className,
   loginLogo = "https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/login-logo-1.svg",
 }: Props): JSX.Element => {
-  const { userId } = useLogin();
+  const { userProfile } = useLogin();
   const navigate = useNavigate();
   const handleHomeClick = () => {
     navigate('/');
@@ -39,12 +39,12 @@ export const Header = ({
         <MenuBarItem className="menu-bar-item-instance" elementClassName="menu-bar-item-3" text="마이 페이지" />
       </div>
       <div className="frame-2">
-        <LoginButton elementClassName=""className="login-button-instance" frameClassName="login-button-2" text={userId ? userId + "님" : "로그인"}/>
+        <LoginButton elementClassName=""className="login-button-instance" frameClassName="login-button-2" text={userProfile?.id ? userProfile?.id + "님" : "로그인"}/>
         <LoginButton
           className="login-button-instance"
           elementClassName="login-button-3"
           frameClassName="login-button-2"
-          text={userId ? "로그아웃" : "회원가입"}
+          text={userProfile ? "로그아웃" : "회원가입"}
         />
       </div>
     </div>

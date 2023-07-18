@@ -4,6 +4,7 @@ import RouteSetup from 'routes/RoutesSetup';
 import { LoginProvider } from 'contexts/LoginContext';
 
 const App: React.FC = () => {
+  // localStorage.removeItem('userProfile');
   return (
     <LoginProvider>
       <BrowserRouter>

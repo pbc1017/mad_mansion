@@ -110,3 +110,11 @@
   top: 5px;
   width: 2vw;
 }
+
+.card .logo {
+  position: relative;
+  margin-top: 25%;
+  margin-left: 25%;
+  height: 50%;
+  width: 50%
+}

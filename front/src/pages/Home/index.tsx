@@ -11,14 +11,14 @@ import "./style.css";
 
 export const Home = (): JSX.Element => {
 
-  const { setUserId } = useLogin();
+  const { setUserProfile } = useLogin();
 
   useEffect(() => {
-    const userId = window.localStorage.getItem('userId');
-    if (userId) {
-      setUserId(userId);
+    const userProfile = window.localStorage.getItem('userProfile');
+    if (userProfile) {
+      setUserProfile(JSON.parse(userProfile));
     }
-  }, [setUserId]);
+  }, [setUserProfile]);
 
   const navigate = useNavigate();
 

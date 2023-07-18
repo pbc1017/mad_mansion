@@ -20,7 +20,7 @@ interface Props {
 
 export const LoginButton = ({ className, frameClassName, elementClassName, text = "로그인" }: Props): JSX.Element => {
   const navigate = useNavigate();
-  const { setUserId } = useLogin();
+  const { setUserProfile } = useLogin();
 
   const handleButtonClick = () => {
     switch(text) {
@@ -31,8 +31,8 @@ export const LoginButton = ({ className, frameClassName, elementClassName, text 
         navigate('/signup');
         break;
       case '로그아웃':
-        localStorage.removeItem('userId');
-        setUserId(null);
+        localStorage.removeItem('userProfile');
+        setUserProfile(null);
         MySocketIO.disconnect();
         navigate('/');
         break;

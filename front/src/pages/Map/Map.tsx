@@ -77,7 +77,7 @@ export interface MapProps {
 
 export const Map = ({addressProp}: MapProps): JSX.Element => {
 
-  const { setUserId } = useLogin();
+  const { setUserProfile } = useLogin();
   const [info, setInfo] = useState<Info>();
   const [positions, setPositions] = useState<any>();
   const [address, setAddresss] = useState<string>(addressProp);
@@ -93,11 +93,11 @@ export const Map = ({addressProp}: MapProps): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    const userId = window.localStorage.getItem('userId');
-    if (userId) {
-      setUserId(userId);
+    const userProfile = window.localStorage.getItem('userProfile');
+    if (userProfile) {
+      setUserProfile(JSON.parse(userProfile));
     }
-  }, [setUserId]);
+  }, [setUserProfile]);
 
   useEffect(()=>{
     console.log(info);

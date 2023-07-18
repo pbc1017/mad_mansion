@@ -1,9 +1,16 @@
 import React, { createContext, useState, useContext } from "react";
 
+
+export type UserProfile = {
+  id: string,
+  wishList: string[],
+  roomList: string[]
+}  
+
 // 유저 ID를 저장하는 타입 정의
 interface IUserContext {
-  userId: string | null;
-  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+  userProfile: UserProfile | null;
+  setUserProfile: React.Dispatch<React.SetStateAction<UserProfile | null>>;
 }
 
 // 컨텍스트 생성
@@ -14,10 +21,10 @@ interface IProps {
 }
 
 const LoginProvider = ({ children }: IProps) => {
-  const [userId, setUserId] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
   return (
-    <LoginContext.Provider value={{ userId, setUserId }}>
+    <LoginContext.Provider value={{ userProfile, setUserProfile }}>
       {children}
     </LoginContext.Provider>
   );
