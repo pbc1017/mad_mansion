@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import React, { useEffect , useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import { UserProfile } from "contexts/LoginContext";
+import { serverPost } from 'utils/severPost';
 import userSvg from "assets/images/anonymous_user.svg"
 import heartSvg from "assets/images/heart.svg"
 import logoSvg from "assets/images/logo.svg"
 import emptyHearSvg from "assets/images/emptyHeart.svg"
-import { serverPost } from 'utils/severPost';
 import "./style.css";
 
 interface House {
@@ -37,6 +38,7 @@ export const Card = ({
   className,
   house,
 }: Props): JSX.Element => {
+    const navigate = useNavigate();
     const [isHouseInWishlist, setIsHouseInWishlist] = useState<boolean>(false);
     let userProfileString = window.localStorage.getItem('userProfile');
     console.log(userProfileString);
@@ -51,6 +53,12 @@ export const Card = ({
         else setIsHouseInWishlist(false);
       }
     }, [house]);
+
+    const handleDetail = async () => {
+      if (house) {
+        navigate(`/detail?detail=${encodeURIComponent(house.id)}`);
+      }
+    }
     
     const handleClick = async () => {
 
@@ -78,7 +86,7 @@ export const Card = ({
       }
     };
   return (
-    <div className={`card ${className}`}>
+    <div className={`card ${className}`} onClick={handleDetail}>
       {house ? (
         <div className="overlap-group">
           <div className="frame-3">

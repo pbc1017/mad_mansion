@@ -12,6 +12,7 @@ import "./style.css";
 export const Home = (): JSX.Element => {
 
   const { setUserProfile } = useLogin();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userProfile = window.localStorage.getItem('userProfile');
@@ -20,7 +21,7 @@ export const Home = (): JSX.Element => {
     }
   }, [setUserProfile]);
 
-  const navigate = useNavigate();
+  
 
   const handleSearchMessage = (data: string) => {
     navigate(`/map?query=${encodeURIComponent(data)}`);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "components/Header";
 import { RoomInfo } from "components/RoomInfo";
+import { useLocation } from 'react-router-dom';
 import prevSvg from "assets/images/prev.svg";
 import nextSvg from "assets/images/next.svg";
 import logoSvg from "assets/images/logo.svg";
@@ -10,9 +11,6 @@ import PostingAddModal from 'components/PostingAddModal'
 import PostingViewModal from 'components/PostingViewModal'
 import "./style.css";
 
-export type DetailProps = {
-  placeId : string
-}
 export type Posting = {
   _id : string,
   maxNum : number,
@@ -22,7 +20,10 @@ export type Posting = {
   placeId : string,
   members : string[]
 }
-export const Detail = ({placeId} : DetailProps): JSX.Element => {
+export const Detail = (): JSX.Element => {
+  const { search } = useLocation();
+  const query = new URLSearchParams(search).get('detail');
+  console.log(query)
 
   const [postings, setPostings] = useState<Array<Posting> | null>(null);
 
@@ -41,14 +42,13 @@ export const Detail = ({placeId} : DetailProps): JSX.Element => {
     setPostingToView(Posting);
   }
 
+  console.log(query);
   useEffect(()=>{
 
-      serverPost("getPostingsfromHouse", { placeId : placeId })
+      serverPost("getPostingsfromHouse", { placeId : query })
           .then((data: any) => {
-            console.log(data[0]._id);
             if (data) {
                 setPostings(data);
-                  // 홈페이지로 이동
             } else {
               console.log("포스팅 실패 혹은 없음")
             }
