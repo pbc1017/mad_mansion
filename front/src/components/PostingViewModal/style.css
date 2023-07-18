@@ -91,6 +91,7 @@
 }
 
 .modal .rectangle {
+    background: #ffffff;
     height: 43px;
     left: 24px;
     font-family: "NanumBarunGothic-Regular", Helvetica;
@@ -102,6 +103,7 @@
 }
 
 .modal .rectangle-2 {
+    background: #ffffff;
     height: 135px;
     left: 23px;
     font-size: 16px;
