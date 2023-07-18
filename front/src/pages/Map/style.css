@@ -52,19 +52,27 @@ html, body {margin: 0px; padding: 0px;}
 
 .map .frame-8 {
   z-index: 100;
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   gap: 18px;
-  left: 5.22vw;
   position: absolute;
   bottom: 1vh;
-  width: 1356px;
+  width: 100vw;
+}
+.map .frame-cards {
+  align-items: flex-start;
+  display: flex;
+  gap: 1vw;
+  left: 5vw;
+  position: absolute;
+  bottom: 1vh;
+  width: 92vw;
 }
 
 .map .card-instance {
   width: 12vw !important;
   position: relative !important;
-  margin-right: 2.7vw;
+  margin-right: auto;
 }
 
 .map .header-instance {
@@ -72,4 +80,18 @@ html, body {margin: 0px; padding: 0px;}
   mix-blend-mode: normal !important;
   position: absolute !important;
   top: 3px !important;
+}
+
+.map .prev-wrapper {
+  position: absolute;
+  left:2.5vw;
+  width: 0.5vw;
+  bottom:10vh;
+}
+
+.map .next-wrapper {
+  position: absolute;
+  left:96.5vw;
+  width: 0.5vw;
+  bottom:10vh;
 }

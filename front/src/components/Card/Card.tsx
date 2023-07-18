@@ -4,22 +4,42 @@ import userSvg from "assets/images/anonymous_user.svg"
 import heartSvg from "assets/images/heart.svg"
 import "./style.css";
 
+interface House {
+  _id: string;
+  id: string;
+  priceType: string;
+  priceFirst: number;
+  priceMonth: number;
+  description: string;
+  floor: string;
+  area: number;
+  fee: number;
+  roomType: string;
+  roomNum: number;
+  address: string;
+  latitude: number;
+  longitude: number;
+  detailUrl: string;
+  imageUrl: string;
+  roomList: any[];
+}
+
 interface Props {
   className: any;
-  text: string;
+  house?: House;
 }
 
 export const Card = ({
   className,
-  text = "현재 5명이 룸메 구하는 중",
+  house,
 }: Props): JSX.Element => {
   return (
     <div className={`card ${className}`}>
       <div className="overlap-group">
         <div className="frame-3">
-          <div className="rectangle" />
+          <img className="rectangle" src={house?.imageUrl} />
           <div className="frame-4">
-            <div className="element-2">월세 000 / 00</div>
+            <div className="element-2">{house?.priceType} {house?.priceFirst} / {house?.priceMonth}</div>
             <div className="element-wrapper">
               <div className="element-m">33m2</div>
             </div>
@@ -29,7 +49,7 @@ export const Card = ({
           </div>
           <div className="frame-5">
             <img className="anonymous-user" alt="Anonymous user" src={userSvg} />
-            <p className="p">{text}</p>
+            <p className="p">{house?.address}</p>
           </div>
         </div>
         <img className="heart" alt="Heart" src={heartSvg} />
