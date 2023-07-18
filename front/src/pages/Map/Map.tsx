@@ -41,7 +41,7 @@ interface House {
   longitude: number;
   detailUrl: string;
   imageUrl: string;
-  roomList: any[];
+  postingList: any[];
 }
 
 function getSortedHouses(current_lat: number, current_lng: number, page: number, data: House[]): House[] {

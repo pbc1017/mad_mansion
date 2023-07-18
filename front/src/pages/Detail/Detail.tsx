@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Header } from "components/Header";
 import { RoomInfo } from "components/RoomInfo";
 import { useLocation } from 'react-router-dom';
+import { useLogin } from "contexts/LoginContext";
 import prevSvg from "assets/images/prev.svg";
 import nextSvg from "assets/images/next.svg";
 import logoSvg from "assets/images/logo.svg";
@@ -10,6 +11,26 @@ import {serverPost} from '../../utils/severPost'
 import PostingAddModal from 'components/PostingAddModal'
 import PostingViewModal from 'components/PostingViewModal'
 import "./style.css";
+
+interface House {
+  _id: string;
+  id: string;
+  priceType: string;
+  priceFirst: number;
+  priceMonth: number;
+  description: string;
+  floor: string;
+  area: number;
+  fee: number;
+  roomType: string;
+  roomNum: number;
+  address: string;
+  latitude: number;
+  longitude: number;
+  detailUrl: string;
+  imageUrl: string;
+  postingList: any[];
+}
 
 export type Posting = {
   _id : string,
@@ -21,11 +42,13 @@ export type Posting = {
   members : string[]
 }
 export const Detail = (): JSX.Element => {
+  const { setUserProfile } = useLogin();
   const { search } = useLocation();
   const query = new URLSearchParams(search).get('detail');
   console.log(query)
 
   const [postings, setPostings] = useState<Array<Posting> | null>(null);
+  const [house, setHouse] = useState<House>();
 
   const [isPostAddingModalOpen, setisPostAddingModalOpen] = useState<boolean>(false);
 
@@ -42,19 +65,43 @@ export const Detail = (): JSX.Element => {
     setPostingToView(Posting);
   }
 
+  useEffect(() => {
+    const userProfile = window.localStorage.getItem('userProfile');
+    if (userProfile) {
+      setUserProfile(JSON.parse(userProfile));
+    }
+  }, [setUserProfile]);
+
   console.log(query);
   useEffect(()=>{
 
-      serverPost("getPostingsfromHouse", { placeId : query })
-          .then((data: any) => {
-            if (data) {
-                setPostings(data);
-            } else {
-              console.log("포스팅 실패 혹은 없음")
-            }
-          });
+    serverPost("getPostingsfromHouse", { placeId : query })
+      .then((data: any) => {
+        if (data) {
+            setPostings(data);
+        } else {
+          console.log("포스팅 실패 혹은 없음")
+        }
+      });
+    serverPost("getDetail", { id : query })
+      .then((data: any) => {
+        if (data) {
+            setHouse(data);
+        } else {
+          console.log("상세보기 실패 혹은 없음")
+        }
+      });
+      
   },[]);
 
+  function randDiv() {
+    switch(Math.floor(Math.random() * 4)){
+      case 0: return <div className="text-wrapper-4">북향</div>
+      case 1: return <div className="text-wrapper-4">남향</div>
+      case 2: return <div className="text-wrapper-4">동향</div>
+      case 3: return <div className="text-wrapper-4">서향</div>
+    }
+  }
 
   return (
     <div className="detail">
@@ -62,10 +109,10 @@ export const Detail = (): JSX.Element => {
         <div className="frame-3">
           <Header className="header-instance" loginLogo={logoSvg} />
           <div className="frame-4">
-            <div className="frame-5">
-              <img className="prev" alt="Prev" src={prevSvg} />
-              <img className="next" alt="Next" src={nextSvg} />
-            </div>
+            <img className="frame-5" src={house?.imageUrl}>
+              {/* <img className="prev" alt="Prev" src={prevSvg} />
+              <img className="next" alt="Next" src={nextSvg} /> */}
+            </img>
             <div className="overlap-group-wrapper">
               <div className="overlap-group">
                 <h1 className="h-1">룸메이트 구합니다</h1>
@@ -91,11 +138,12 @@ export const Detail = (): JSX.Element => {
           </div>
           <div className="group">
             <div className="frame-7">
+              <div className="title">{house?.description}</div>
               <div className="text-wrapper-2">가격정보</div>
               <div className="frame-8">
                 <div className="group-2">
-                  <div className="text-wrapper-3">월세</div>
-                  <div className="text-wrapper-4">9500</div>
+                  <div className="text-wrapper-3">{house?.priceType}</div>
+                  {house?.priceType =="전세"? <div className="text-wrapper-4">{house?.priceFirst}만원</div> : <div className="text-wrapper-4">{house?.priceFirst}/{house?.priceMonth}만원</div>}
                 </div>
                 <div className="group-3">
                   <div className="text-wrapper-3">융자금</div>
@@ -103,7 +151,7 @@ export const Detail = (): JSX.Element => {
                 </div>
                 <div className="group-4">
                   <div className="text-wrapper-3">관리비</div>
-                  <div className="text-wrapper-4">매월 3만원</div>
+                  <div className="text-wrapper-4">매월 {house?.fee}만원</div>
                 </div>
                 <div className="group-5">
                   <div className="text-wrapper-3">주차가능여부</div>
@@ -115,47 +163,47 @@ export const Detail = (): JSX.Element => {
               <div className="frame-9">
                 <div className="group-2">
                   <div className="text-wrapper-3">방종류</div>
-                  <div className="text-wrapper-4">9500</div>
+                  <div className="text-wrapper-4">{house?.roomType}</div>
                 </div>
                 <div className="group-3">
-                  <div className="text-wrapper-3">해당층/건물층</div>
-                  <div className="text-wrapper-4">-</div>
+                  <div className="text-wrapper-3">해당층</div>
+                  <div className="text-wrapper-4">{house?.floor}</div>
                 </div>
                 <div className="group-4">
-                  <div className="text-wrapper-3">전용/공급면적</div>
-                  <div className="text-wrapper-4">매월 3만원</div>
+                  <div className="text-wrapper-3">전용면적</div>
+                  <div className="text-wrapper-4">{house?.area}m²</div>
                 </div>
                 <div className="group-5">
                   <div className="text-wrapper-3">방 수/욕실 수</div>
-                  <div className="text-wrapper-4">가능</div>
+                  <div className="text-wrapper-4">{house?.roomNum}개/1개</div>
                 </div>
                 <div className="group-5">
                   <div className="text-wrapper-3">방향</div>
-                  <div className="text-wrapper-4">가능</div>
+                  {randDiv()}
                 </div>
                 <div className="group-5">
                   <div className="text-wrapper-3">총 주차대수</div>
-                  <div className="text-wrapper-4">가능</div>
+                  <div className="text-wrapper-4">{Math.floor(Math.random() * 5)+1}대</div>
                 </div>
                 <div className="group-5">
                   <div className="text-wrapper-3">현관 유형</div>
-                  <div className="text-wrapper-4">가능</div>
+                  <div className="text-wrapper-4">계단식</div>
                 </div>
                 <div className="group-5">
                   <div className="text-wrapper-3">입주가능일</div>
-                  <div className="text-wrapper-4">가능</div>
+                  <div className="text-wrapper-4">즉시입주</div>
                 </div>
                 <div className="group-6">
                   <div className="text-wrapper-3">건축물용도</div>
-                  <div className="text-wrapper-4">계단식</div>
+                  <div className="text-wrapper-4">단독주택</div>
                 </div>
                 <div className="group-6">
                   <div className="text-wrapper-3">사용승인일</div>
-                  <div className="text-wrapper-4">계단식</div>
+                  <div className="text-wrapper-4">20{Math.floor(Math.random() * 10)+10}.0{Math.floor(Math.random() * 9)+1}.1{Math.floor(Math.random() * 9)+1}</div>
                 </div>
                 <div className="group-6">
                   <div className="text-wrapper-3">최초등록일</div>
-                  <div className="text-wrapper-4">계단식</div>
+                  <div className="text-wrapper-4">2023.07.0{Math.floor(Math.random() * 9)+1}</div>
                 </div>
               </div>
             </div>

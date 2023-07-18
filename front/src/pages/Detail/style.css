@@ -108,7 +108,7 @@
 
 .detail .group {
   background-color: #ffffff;
-  height: 926px;
+  height: 1050px;
   width: 70vw;
   position: relative;
 }
@@ -272,4 +272,17 @@
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
+}
+
+.detail .title {
+  font-family: "NanumBarunGothic-Bold", Helvetica;
+  background: #f0f0f0;
+  font-size: 20px;
+  padding: 30px;
+  width: 62vw;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

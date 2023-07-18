@@ -50,8 +50,9 @@
 
 .card .element-wrapper {
   height: 2.13vh;
-  min-width: 2vw;
-  position: relative;
+  width: 3vw;
+  left: 7.5vw;
+  position: absolute;
 }
 
 .card .element-m {
@@ -72,9 +73,13 @@
   font-size: 1.02vw;
   font-weight: 400;
   letter-spacing: 0;
+  display: inline-block;
+  width: 10vw;
   line-height: normal;
   position: relative;
-  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card .frame-5 {

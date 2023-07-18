@@ -9,7 +9,7 @@ import logoSvg from "assets/images/logo.svg"
 import emptyHearSvg from "assets/images/emptyHeart.svg"
 import "./style.css";
 
-interface House {
+export default interface House {
   _id: string;
   id: string;
   priceType: string;
@@ -26,7 +26,7 @@ interface House {
   longitude: number;
   detailUrl: string;
   imageUrl: string;
-  roomList: any[];
+  postingList: any[];
 }
 
 interface Props {
@@ -86,23 +86,23 @@ export const Card = ({
       }
     };
   return (
-    <div className={`card ${className}`} onClick={handleDetail}>
+    <div className={`card ${className}`} >
       {house ? (
         <div className="overlap-group">
-          <div className="frame-3">
+          <div className="frame-3" onClick={handleDetail}>
             <img className="rectangle" src={house?.imageUrl} />
             <div className="frame-4">
-              <div className="element-2">{house?.priceType} {house?.priceFirst} / {house?.priceMonth}</div>
+              <div className="element-2">{house?.priceType =="전세"? <div className="text-wrapper-4">{house?.priceFirst}</div> : <div className="text-wrapper-4">{house?.priceFirst}/{house?.priceMonth}</div>}</div>
               <div className="element-wrapper">
-                <div className="element-m">33m2</div>
+                <div className="element-m">{house?.roomNum}인실</div>
               </div>
             </div>
             <div className="element-3">
-              풀옵션, 신축, 리모델링, 
+              {house?.description}
             </div>
             <div className="frame-5">
               <img className="anonymous-user" alt="Anonymous user" src={userSvg} />
-              <p className="p">{house?.address}</p>
+              <p className="p">현재 {house?.postingList.length}명이 방 구하는 중</p>
             </div>
           </div>
           <img className="heart" alt="Heart" onClick={handleClick} src={isHouseInWishlist ? heartSvg : emptyHearSvg}

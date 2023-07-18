@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const express=require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -13,6 +13,7 @@ var server=require('http').createServer(app);
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended : false}));
+
 app.post('/api/login',async (req,res)=>{
   try{
     console.log(req.body);
@@ -159,105 +160,17 @@ try {
     finally {
       // client.close();
     }
-});
-app.post('/api/makeApply', async (req, res) => {
-    try {
-        //req.body = { sender: "", postingId: "", content: "" }
-        //res = apply 객체
+})
 
-        console.log(req.body);
-        await client.connect();
-        const Applies = client.db('Postings').collection('applies');
-        const House = client.db('House').collection('house');
-        const Posting = client.db('Postings').collection('postings');
-        const User = client.db('User').collection('user');
-        const info = req.body;
-
-        const posting= await Posting.find({_id : new ObjectId(info.postingId)}).toArray();
-        console.log(posting);
-        const house= await House.find({id : posting[0].placeId}).toArray();
-        console.log(house[0]);
-        const receiver = await User.find({id : posting[0].writer}).toArray();
-        const sender= await User.find({id : info.sender}).toArray();
-        console.log(receiver[0]);
-        console.log(sender[0]);
-
-        const result = await Applies.insertOne({
-            sender: info.sender,
-            placeId: house[0].id,
-            postingId: info.postingId,
-            postingWriter: posting[0].writer,
-            content : info.content,
-            state: "waiting"
-        });
-
-        console.log(result.insertedId);
-        const apply = await Applies.find({_id : result.insertedId}).toArray();
-        console.log(apply[0]);
-
-        console.log(sender[0].receivedApplyList);
-        console.log(receiver[0].receivedApplyList);
-        console.log(posting[0].receivedApplyList);
-
-        User.updateOne(
-            { _id: new ObjectId(receiver[0].id) },
-            { $push: { receivedApplyList: result.insertedId.toString() }},
-        );
-
-        User.updateOne(
-            { _id: new ObjectId(sender[0].id) },
-            { $push: { applyList: result.insertedId.toString() }},
-            
-        );
-        
-        Posting.updateOne(
-            { _id: new ObjectId(posting[0].id) },
-            { $push: { receivedApplyList: result.insertedId.toString() }}
-        );
-             
-          
-        res.json(apply[0]);
-    }
-    finally {
-        // client.close();
-    }
-});
-
-app.post('/api/makePosting', async (req, res) => {
-  //   서버  URL:  '/api/makePosting'
-// 요청 방식: POST
-// req.body : { placeId : "" , userId : "" , title : "", content: ""}
-// 수행 Postings.postings에 req에 맞춰 새로운 Posting 문서를 insert
-// res : insert한 Posting 문서 객체를 반환
-
+app.post('/api/getDetail', async (req, res) => {
   try {
-    // 데이터베이스와 콜렉션 선택
-    const db = client.db('Postings');
-    const postings = db.collection('postings');
-  
-    // 새로운 Posting 문서 생성
-    const newPosting = {
-      _id: new ObjectId,
-      maxNum: 3,  // You can adjust the default maxNum
-      title: req.body.title,
-      content: req.body.content,
-      placeId: req.body.placeId,
-      members: [req.body.userId],  // The writer is automatically a member
-      writer: req.body.userId,
-      receivedApplyList: []
-    };
-
-    // 새로운 Posting 문서 저장
-    const result = await postings.insertOne(newPosting);
-  
-    // 결과 반환
-    console.log(newPosting);
-    res.json(newPosting);
-  } catch (error) {
-    res.status(500).json({ error: error.toString() });
+    await client.connect();
+    Applies=client.db('House').collection('house');
+    let result = await Applies.find(req.body).toArray();
+    res.json(result[0])
   }
-});
-
+  finally {}
+})
 
 server.listen(80,main);
 
