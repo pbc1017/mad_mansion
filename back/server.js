@@ -1,6 +1,7 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const express=require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const fs=require('fs')
 // const prompt=require('prompt-sync')({singint:true});
 
@@ -12,57 +13,6 @@ var server=require('http').createServer(app);
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended : false}));
-const io = require('socket.io')(server, {cors: {origin: '*'}});
-
-io.on('connect', (socket) => {
-  let currentRoom;
-  socket.on('sendUserId', (username) => {
-    console.log(`@@ 사용자 연결 : ${username} (${socket.id})`);
-
-    socket.on('join', async (room) => {
-      console.log(`@@ 채팅방 입장 (${username} )to( ${room} )`);
-      currentRoom = room;
-      socket.join(currentRoom);
-
-      const message = `${username}님이 입장하셨습니다.`;
-
-      socket.to(currentRoom).emit('sendMessage', message, room, 'admin');
-    });
-
-    socket.on("disconnect", () => {
-    console.log(`Client disconnected: ${username} with ${socket.id}`);
-    });
-    socket.on('user list', async (room) => {
-      console.log('user list:');
-      console.log(room);
-      socket.broadcast.emit('users', { title: room.title, users: room.users });
-    });
-
-    socket.on('sendMessage', async (message, roomId) => {
-      
-      console.log(`${message} + ${username} to ${roomId}`);
-      // const result = await userRepository.addMessage(username, roomname, {
-      //   sender,
-      //   message,
-      // });
-      // console.log(result);
-      const room = await roomRepository.getRoom(sentRoom);
-      const usersInRoom = room.users;
-      usersInRoom.forEach((user) => {
-        if (user !== username) {
-          userRepository.addMessage(user, sentRoom, { sender, message });
-        }
-      });
-
-      socket.emit('message', { sender, message, sentRoom });
-      socket.broadcast.to(roomId).emit('message', {
-        sender,
-        message,
-        sentRoom,
-      });
-    });
-  });
-});
 
 app.post('/api/login',async (req,res)=>{
   try{
@@ -143,10 +93,10 @@ app.post('/api/getPostingsfromHouse',async (req,res)=>{
   try {
     console.log(req.body);
     await client.connect();
-    house=client.db('Postings').collection('postings');
+    Postings =client.db('Postings').collection('postings');
     const info = req.body;
     let result=await 
-    house.find({placeId:  info.placeId }).toArray();
+    Postings.find({placeId:  info.placeId }).toArray();
     result = result.map(item => {
       return {
         ...item,
@@ -161,7 +111,56 @@ app.post('/api/getPostingsfromHouse',async (req,res)=>{
   }
 })
 
+app.post('/api/getPostingsfromUser', async (req,res)=>{
+  //userProfile을 id를 보내면 user의 Postings를 반환
+  
+  try {
+    
+    console.log(req.body);
+    await client.connect();
+    house=client.db('Postings').collection('postings');
+    const info = req.body;
+    let result = await 
+    Postings.find({writer:  info.id }).toArray();
+    result = result.map(item => {
+      return {
+        ...item,
+        _id: item._id.toString()
+      }
+    });
+    console.log(result);
+    res.json(result);
+  }
+  finally {
+    // client.close();
+  }
+});
 
+app.post('/api/getHouseFromApply', async (req, res) => {
+try {
+    //apply로부터 House를 찾아냄
+
+    console.log(req.body);
+    await client.connect();
+    Applies=client.db('Postings').collection('applies');
+    const info = req.body;
+    console.log(info);
+    let result = await 
+    Applies.find({_id: new mongoose.Types.ObjectId(info._id) }).toArray();
+    console.log(result);
+    result = result.map(item => {
+      return {
+        ...item,
+        _id: item._id.toString()
+      }
+    });
+    console.log(result);
+    res.json(result[0]);
+    }
+    finally {
+      // client.close();
+    }
+})
 server.listen(80,main);
 
 //DB CODE
