@@ -56,7 +56,9 @@ const LoginInput: React.FC<{ className?: string }> = ({ className }) => {
             const userProfile : UserProfile = {
               id : data.id,
               wishList : data.wishList,
-              roomList : data.wishList
+              postingList : data.postingList,
+              applyList : data.applyList,
+              receivingApplyList : data.applyList
             }
             setUserProfile(userProfile);  // 컨텍스트의 상태 변경
             console.log("로그인 성공");

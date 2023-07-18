@@ -1,6 +1,6 @@
 // index.ts
 
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import * as S from './style';
 import type {Info} from '../../pages/Map/Map'
 
@@ -30,6 +30,25 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
     const optionRef = useRef<any>(null);
     let info : any = null;
 
+    const onMapEvent = useCallback(function() {        
+        // 지도 중심좌표를 얻어옵니다 
+            info = {swLatLng: {
+                lat: kakaoMapRealRef.current.getBounds().getSouthWest().getLat(),
+                lng: kakaoMapRealRef.current.getBounds().getSouthWest().getLng(),
+              },neLatLng: {
+                lat: kakaoMapRealRef.current.getBounds().getNorthEast().getLat(),
+                lng: kakaoMapRealRef.current.getBounds().getNorthEast().getLng(),
+              },
+            };
+
+            optionRef.current = {
+            center: new kakao.maps.LatLng(kakaoMapRealRef.current.getCenter().getLat(), kakaoMapRealRef.current.getCenter().getLng()),
+            level : kakaoMapRealRef.current.getLevel()
+            };
+
+            console.log(optionRef.current);
+            setMapInfo(info);
+        },[]);
     useEffect(() => {
         const kakaoMapElement = kakaoMapRef.current;
         optionRef.current = optionRef.current ? optionRef.current : {
@@ -75,26 +94,7 @@ export function KakaoMap({ address, positions, height = '100%', setMapInfo}: Kak
         ps.keywordSearch(address, placesSearchCB);
         
         
-        kakao.maps.event.addListener(kakaoMapRealRef.current, 'dragend', function() {        
-        // 지도 중심좌표를 얻어옵니다 
-            info = {swLatLng: {
-                lat: kakaoMapRealRef.current.getBounds().getSouthWest().getLat(),
-                lng: kakaoMapRealRef.current.getBounds().getSouthWest().getLng(),
-              },neLatLng: {
-                lat: kakaoMapRealRef.current.getBounds().getNorthEast().getLat(),
-                lng: kakaoMapRealRef.current.getBounds().getNorthEast().getLng(),
-              },
-            };
-
-            optionRef.current = {
-            center: new kakao.maps.LatLng(kakaoMapRealRef.current.getCenter().getLat(), kakaoMapRealRef.current.getCenter().getLng()),
-            level : kakaoMapRealRef.current.getLevel()
-            };
-
-            console.log(optionRef.current);
-            setMapInfo(info);
-        });
-        
+        kakao.maps.event.addListener(kakaoMapRealRef.current, 'idle', onMapEvent);
     }, [address]);
 
 

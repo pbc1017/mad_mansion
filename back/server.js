@@ -240,10 +240,15 @@ app.post('/api/makePosting', async (req, res) => {
     const db = client.db('Postings');
     const postings = db.collection('postings');
     const User = client.db('User').collection('user');
+    const House = client.db('House').collection('house');
+
+
+    const house = House.find({id : req.body.placeId});
+
     // 새로운 Posting 문서 생성
     const newPosting = {
       _id: new ObjectId,
-      maxNum: 3,  // You can adjust the default maxNum
+      maxNum: house[0].roomNum,  // You can adjust the default maxNum
       title: req.body.title,
       content: req.body.content,
       placeId: req.body.placeId,

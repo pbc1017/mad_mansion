@@ -4,7 +4,9 @@ import React, { createContext, useState, useContext } from "react";
 export type UserProfile = {
   id: string,
   wishList: string[],
-  roomList: string[]
+  applyList: string[],
+  postingList: string[],
+  receivingApplyList: string[]
 }  
 
 // 유저 ID를 저장하는 타입 정의
