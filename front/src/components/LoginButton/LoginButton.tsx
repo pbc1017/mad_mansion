@@ -7,7 +7,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from 'contexts/LoginContext';
+import * as MySocketIO from '../../utils/SocketIO';
 import "./style.css";
+
 
 interface Props {
   className: any;
@@ -31,6 +33,7 @@ export const LoginButton = ({ className, frameClassName, elementClassName, text 
       case '로그아웃':
         localStorage.removeItem('userId');
         setUserId(null);
+        MySocketIO.disconnect();
         navigate('/');
         break;
       default:

@@ -3,10 +3,12 @@ We're constantly improving the code you see.
 Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
 */
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { ChatFooter } from "../ChatFooter";
 import { ChatHeader } from "../ChatHeader";
 import { Messages } from "../Messages";
+import { useLogin } from "contexts/LoginContext";
+import * as MySocketIO from '../../utils/SocketIO'
 import "./style.css";
 
 interface Props {
@@ -14,6 +16,16 @@ interface Props {
 }
 
 export const ChatRoom = ({ className }: Props): JSX.Element => {
+
+  const { setUserId } = useLogin();
+  useEffect(() => {
+    const userId = window.localStorage.getItem('userId');
+    if (userId) {
+      MySocketIO.connectUserId(userId);
+      setUserId(userId);
+    }
+  }, [setUserId]);
+
   return (
     <div className={`chat-room ${className}`}>
       <ChatHeader className="design-component-instance-node" overlapGroupClassName="design-component-instance-node-2" />

@@ -3,7 +3,7 @@ import './style.css';
 import { serverPost } from 'utils/severPost';
 import { useLogin } from 'contexts/LoginContext';
 import { useNavigate } from 'react-router-dom';
-
+import * as MySocketIo from '../../../utils/SocketIO'
 type InputProps = {
   name: string,
   value: string,
@@ -54,6 +54,8 @@ const LoginInput: React.FC<{ className?: string }> = ({ className }) => {
             setUserId(data.id);  // 컨텍스트의 상태 변경
             console.log("로그인 성공");
             window.localStorage.setItem('userId', data.id);
+
+            MySocketIo.connectUserId(data.id);     
             navigate('/');  // 홈페이지로 이동
         } else {
             console.log("로그인 실패");
