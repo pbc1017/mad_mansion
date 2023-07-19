@@ -1,19 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {UserProfile} from 'contexts/LoginContext'
 import {Posting} from 'pages/Detail/Detail'
+import { serverPost } from 'utils/severPost';
 import './style.css'
 type ModalProps = {
   onClose: (Posting : Posting | null) => void;
   Posting: Posting
 };
 
-const postingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProps) => {
+const PostingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProps) => {
     const onClosePosting = ()=>{
         onClose(null);
     }
-    // useEffect(() => {
-    //     console.log("제발..");
-    // }, []);
+    const [text, setText] = useState<string>('');
+    
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+      setText(value);
+  };
+
+  const onClickMakeApply = () => {
+    
+    const userProfileString = localStorage.getItem('getUserProfile');
+    if(userProfileString){
+        const userProfile : UserProfile = JSON.parse(userProfileString);
+        serverPost("login", { sender: userProfile.id, postingId: Posting._id, content: text }).then((data: any) => {
+        // data.id 가 존재하는 경우에만 로그인을 수행
+        if (data.id) {
+            userProfile.applyList.push(data._id);
+            
+            window.localStorage.setItem('userProfile', (JSON.stringify(userProfile)));  
+            
+            onClosePosting();  // 홈페이지로 이동
+        } else {
+            console.log("로그인 실패");
+        }
+    });
+    }
+  };
+
   return (
     <div className="postingViewModal">
       <div className="div">
@@ -24,7 +49,7 @@ const postingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProp
         </div>
         <div className="text-wrapper-4">내용</div>
         <div className="frame">
-          <div className="text-wrapper-5">가입 신청하기</div>
+          <div className="text-wrapper-5" onClick= {onClickMakeApply}>가입 신청하기</div>
         </div>
         <div className="rectangle">{Posting.title}</div>
         <div className="rectangle-2">{Posting.content}</div>
@@ -36,4 +61,4 @@ const postingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProp
   );
 }
 
-export default postingViewModal;
+export default PostingViewModal;

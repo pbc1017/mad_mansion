@@ -6,7 +6,7 @@ type ModalProps = {
   onClose: () => void;
 };
 
-const postingAddModal: React.FC<ModalProps> = ({ onClose }) => {
+const PostingAddModal: React.FC<ModalProps> = ({ onClose }) => {
   return (
     <div className="postingAddModal">
       <div className="div">
@@ -24,4 +24,4 @@ const postingAddModal: React.FC<ModalProps> = ({ onClose }) => {
   );
 };
 
-export default postingAddModal;
+export default PostingAddModal;
