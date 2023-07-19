@@ -36,7 +36,6 @@ app.post('/api/login',async (req,res)=>{
 
 });
 
-
 app.post('/api/clickHeart',async (req,res)=>{
   try{
     console.log(req.body);
@@ -68,7 +67,6 @@ app.post('/api/clickHeart',async (req,res)=>{
   }
 
 });
-
 
 app.post('/api/map',async (req,res)=>{
   try {
@@ -243,7 +241,6 @@ app.post('/api/makePosting', async (req, res) => {
     const House = client.db('House').collection('house');
 
 
-
     const house = await House.find({id : req.body.placeId}).toArray();
     console.log(house);
     // 새로운 Posting 문서 생성
@@ -275,14 +272,12 @@ app.post('/api/makePosting', async (req, res) => {
   }
 });
 
-
 app.post('/api/getReceivedApply', async (req, res) => {
   //   서버  URL:  '/api/getReceivedApply'
 // 요청 방식: POST
 // req.body : {userId : "" }
 // 수행 Postings db의 apply collection의 state가 "waiting" && sender = req.body.userId인 apply들을 검색
 // res : 해당 apply들의 배열을 반환 
-
 
   try {
     // Establish a connection to the database
@@ -310,7 +305,6 @@ app.post('/api/getReceivedApply', async (req, res) => {
 
   }
 });
-
 
 app.post('/api/decidingApply', async (req, res) => {
   try {
@@ -367,7 +361,7 @@ app.post('/api/getRandomThreeHouse', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.toString() });
   }
-});
+});//input: {id : id}
 
 app.post('/api/getMyMansion', async (req, res) => {
   try {
@@ -424,50 +418,62 @@ app.post('/api/getMyMansion', async (req, res) => {
         "title": sentPosting.title, 
         "king": receive.postingWriter, 
         "members": sentPosting.members.length, 
-        "price": { "type": sentHouse.priceType, "first": sentHouse.priceFirst, 'month': sentHouse.priceMonth }, 
+        "priceType": sentHouse.priceType, 
+        "priceFirst": sentHouse.priceFirst, 
+        'priceMonth': sentHouse.priceMonth,
         "maxmembers": sentHouse.roomNum, 
         "address": sentHouse.address ,
-        "imgUrl":sentHouse.imgUrl
+        "imgUrl":sentHouse.imageUrl,
+        "id": receive._id.toString()
       });
     }
 
-    res.json({ "sent": sentResult, "recieve": recieveResult });
+    const sentResult1 = sentResult.filter(item => item.state === 'accepted');
+    const sentResult2 = sentResult.filter(item => item.state === 'waiting');
+    const sentResult3 = sentResult.filter(item => item.state === 'denied');
+
+    const recieveResult1 = recieveResult.filter(item => item.state === 'accepted');
+    const recieveResult2 = recieveResult.filter(item => item.state === 'waiting');
+    const recieveResult3 = recieveResult.filter(item => item.state === 'denied');
+
+    res.json({ "sent": [sentResult1, sentResult2, sentResult3], "recieve": [recieveResult1, recieveResult2, recieveResult3] });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Something went wrong' });
   }
 })
 
-
 app.post('/api/getWishList', async(req, res) => {
-try {
-        const userId = req.body.id;
-        
-        // Connect to the user collection
-        const userCollection = client.db('User').collection('user');
-        
-        // Find the user with the given ID and retrieve their wishList
-        const user = await userCollection.findOne({ id: userId });
-        const wishList = user.wishList;
-        
-        // Connect to the house collection
-        const houseCollection = client.db('House').collection('house');
-        
-        // Find the houses that match the IDs in the wishList
-        const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
-        
-        // Send the list of houses as the response
-        res.json(houses);
-    } catch (error) {
-        res.status(500).json({ error: error.toString() });
-    }
-});
+  try {
+          const userId = req.body.id;
+          
+          // Connect to the user collection
+          const userCollection = client.db('User').collection('user');
+          
+          // Find the user with the given ID and retrieve their wishList
+          const user = await userCollection.findOne({ id: userId });
+          const wishList = user.wishList;
+          
+          // Connect to the house collection
+          const houseCollection = client.db('House').collection('house');
+          
+          // Find the houses that match the IDs in the wishList
+          const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
+          
+          // Send the list of houses as the response
+          res.json(houses);
+      } catch (error) {
+          res.status(500).json({ error: error.toString() });
+      }
+  });
+
 server.listen(80,main);
 
 //DB CODE
 
 const uri = "mongodb+srv://knsol2:1017@cluster0.ussb1gv.mongodb.net/?retryWrites=true&w=majority";
 //api key E2kpU7xTXiQrNi6WEWE6p1gNFC6dCpd4ZcMEuWHgsn0NHyc86dB3pGVSSwWED7Uz
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -481,3 +487,4 @@ function main() {
     //await collection.updateOne(QUERYDATA},{$set:{CHANGEDATA}})
     console.log("Server On");
 }
+
