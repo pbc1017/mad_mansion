@@ -16,14 +16,15 @@ export type Manshion = {
   priceMonth: string, 
   maxmembers: string, 
   address: string,
-  imgUrl:string
+  imgUrl:string,
+  id:string
 }
 
 export const MyMansion = (): JSX.Element => {
 
   const { setUserProfile } = useLogin();
-  const [manshionSend, setManshionSend] = useState<Array<Manshion>|null>(null);
-  const [manshionRecieve, setManshionRecieve] = useState<Array<Manshion>|null>(null);
+  const [manshionSend, setManshionSend] = useState<Array<Array<Manshion>>|null>(null);
+  const [manshionRecieve, setManshionRecieve] = useState<Array<Array<Manshion>>|null>(null);
 
   useEffect(() => {
     const userProfile = window.localStorage.getItem('userProfile');

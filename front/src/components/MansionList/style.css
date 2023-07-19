@@ -102,3 +102,16 @@
   top: 71px;
   width: 19px;
 }
+
+.mansion-list .modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);  /* 모달이 열릴 때 배경을 어둡게 처리하려면 이 코드를 사용합니다 */
+  z-index: 100;
+}
