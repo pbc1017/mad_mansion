@@ -4,25 +4,40 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import PropTypes from "prop-types";
+import userSvg from "assets/images/anonymous_user.svg";
 import React from "react";
 import "./style.css";
 
-interface Props {
-  className: any;
-  anonymousUser: string;
+export type Manshion = {
+  state: string,
+  title: string, 
+  king: string, 
+  members: string, 
+  priceType: string, 
+  priceFirst: string, 
+  priceMonth: string, 
+  maxmembers: string, 
+  address: string,
+  imgUrl:string
 }
 
-export const MansionList = ({ className, anonymousUser = "/img/anonymous-user-7.svg" }: Props): JSX.Element => {
+interface Props {
+  className: any;
+  manshion: Manshion
+}
+
+export const MansionList = ({ className}: Props,  manshion: Manshion): JSX.Element => {
+  console.log(manshion);
   return (
     <div className={`mansion-list ${className}`}>
       <div className="rectangle" />
-      <div className="element-2">조용한 남자 룸메 구합니다!</div>
-      <div className="pbc">방장: pbc</div>
-      <div className="element-3">월세 500/30</div>
-      <div className="element-4">대전광역시 유성구 대학로 21</div>
-      <div className="element-5">3인실</div>
-      <div className="element-6">2명 / 3명</div>
-      <img className="anonymous-user" alt="Anonymous user" src={anonymousUser} />
+      <div className="element-2">{manshion.title}</div>
+      <div className="pbc">방장: {manshion.king}</div>
+      <div className="element-3">{manshion.priceType} {manshion.priceType =="전세"? <div className="text-wrapper-4">{manshion.priceFirst}만원</div> : <div className="text-wrapper-4">{manshion.priceFirst}/{manshion.priceMonth}만원</div>}</div>
+      <div className="element-4">{manshion.address}</div>
+      <div className="element-5">{manshion.maxmembers}인실</div>
+      <div className="element-6">{manshion.members}명 / {manshion.maxmembers}명</div>
+      <img className="anonymous-user" alt="Anonymous user" src={userSvg} />
     </div>
   );
 };

@@ -36,7 +36,6 @@ app.post('/api/login',async (req,res)=>{
 
 });
 
-
 app.post('/api/clickHeart',async (req,res)=>{
   try{
     console.log(req.body);
@@ -68,7 +67,6 @@ app.post('/api/clickHeart',async (req,res)=>{
   }
 
 });
-
 
 app.post('/api/map',async (req,res)=>{
   try {
@@ -243,7 +241,6 @@ app.post('/api/makePosting', async (req, res) => {
     const House = client.db('House').collection('house');
 
 
-
     const house = await House.find({id : req.body.placeId}).toArray();
     console.log(house);
     // 새로운 Posting 문서 생성
@@ -275,14 +272,12 @@ app.post('/api/makePosting', async (req, res) => {
   }
 });
 
-
 app.post('/api/getReceivedApply', async (req, res) => {
   //   서버  URL:  '/api/getReceivedApply'
 // 요청 방식: POST
 // req.body : {userId : "" }
 // 수행 Postings db의 apply collection의 state가 "waiting" && sender = req.body.userId인 apply들을 검색
 // res : 해당 apply들의 배열을 반환 
-
 
   try {
     // Establish a connection to the database
@@ -310,7 +305,6 @@ app.post('/api/getReceivedApply', async (req, res) => {
 
   }
 });
-
 
 app.post('/api/decidingApply', async (req, res) => {
   try {
@@ -356,29 +350,101 @@ app.post('/api/getDetail', async (req, res) => {
   finally {}
 })
 
-app.post('/api/getWishList', async(req, res) => {
-try {
-        const userId = req.body.id;
-        
-        // Connect to the user collection
-        const userCollection = client.db('User').collection('user');
-        
-        // Find the user with the given ID and retrieve their wishList
-        const user = await userCollection.findOne({ id: userId });
-        const wishList = user.wishList;
-        
-        // Connect to the house collection
-        const houseCollection = client.db('House').collection('house');
-        
-        // Find the houses that match the IDs in the wishList
-        const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
-        
-        // Send the list of houses as the response
-        res.json(houses);
-    } catch (error) {
-        res.status(500).json({ error: error.toString() });
+//input: {id : id}
+
+app.post('/api/getMyMansion', async (req, res) => {
+  try {
+    await client.connect();
+    const house = client.db('House').collection('house');
+    const post = client.db('Postings').collection('postings');
+    const apply = client.db('Postings').collection('applies');
+
+    const sentPostings = await apply.find({ sender: req.body.userId }).toArray();
+    const receivedApplies = await apply.find({ postingWriter : req.body.userId }).toArray();
+
+    console.log(sentPostings);
+    console.log(receivedApplies);
+
+    const sentResult = []
+    const recieveResult = []
+    
+    for (let sent of sentPostings) {
+      const sentPostingArray = await post.find({ "_id": new ObjectId(receive.postingId) }).toArray();
+      
+      if (sentPostingArray.length === 0) {
+        console.error(`No posting found with id ${sent.postingId}`);
+        continue;
+      }
+      
+      const sentPosting = sentPostingArray[0];
+      const sentHouse = (await house.find({ "id": sent.placeId }).toArray())[0];
+      sentResult.push({ 
+        "state": sent.state,
+        "title": sentPosting.title, 
+        "king": receive.postingWriter, 
+        "members": sentPosting.members.length, 
+        "priceType": sentHouse.priceType, 
+        "priceFirst": sentHouse.priceFirst, 
+        'priceMonth': sentHouse.priceMonth, 
+        "maxmembers": sentHouse.roomNum, 
+        "address": sentHouse.address,
+        "imgUrl":sentHouse.imgUrl
+      });
     }
-});
+
+    for (let receive of receivedApplies) {
+      const sentPostingArray = await post.find({ "_id": new ObjectId(receive.postingId) }).toArray();
+      
+      if (sentPostingArray.length === 0) {
+        console.error(`No posting found with id ${receive.postingId}`);
+        continue;
+      }
+      
+      const sentPosting = sentPostingArray[0];
+      const sentHouse = (await house.find({ "id": receive.placeId }).toArray())[0];
+      recieveResult.push({ 
+        "state": receive.state,
+        "title": sentPosting.title, 
+        "king": receive.postingWriter, 
+        "members": sentPosting.members.length, 
+        "price": { "type": sentHouse.priceType, "first": sentHouse.priceFirst, 'month': sentHouse.priceMonth }, 
+        "maxmembers": sentHouse.roomNum, 
+        "address": sentHouse.address ,
+        "imgUrl":sentHouse.imgUrl
+      });
+    }
+
+    res.json({ "sent": sentResult, "recieve": recieveResult });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
+})
+
+app.post('/api/getWishList', async(req, res) => {
+  try {
+          const userId = req.body.id;
+          
+          // Connect to the user collection
+          const userCollection = client.db('User').collection('user');
+          
+          // Find the user with the given ID and retrieve their wishList
+          const user = await userCollection.findOne({ id: userId });
+          const wishList = user.wishList;
+          
+          // Connect to the house collection
+          const houseCollection = client.db('House').collection('house');
+          
+          // Find the houses that match the IDs in the wishList
+          const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
+          
+          // Send the list of houses as the response
+          res.json(houses);
+      } catch (error) {
+          res.status(500).json({ error: error.toString() });
+      }
+  });
+
 server.listen(80,main);
 
 //DB CODE
@@ -399,3 +465,4 @@ function main() {
     //await collection.updateOne(QUERYDATA},{$set:{CHANGEDATA}})
     console.log("Server On");
 }
+
