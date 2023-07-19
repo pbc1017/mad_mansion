@@ -35,8 +35,8 @@ export const Header = ({
           elementClassName="design-component-instance-node"
           text="관심 목록"
         />
-        <MenuBarItem className="menu-bar-item-instance" elementClassName="menu-bar-item-2" text="내가 신청한 방" />
-        <MenuBarItem className="menu-bar-item-instance" elementClassName="menu-bar-item-3" text="마이 페이지" />
+        <MenuBarItem className="menu-bar-item-instance" elementClassName="menu-bar-item-2" text="나의 맨션 관리" />
+        <MenuBarItem className="menu-bar-item-instance" elementClassName="menu-bar-item-3" text="마이페이지" />
       </div>
       <div className="frame-2">
         <LoginButton elementClassName=""className="login-button-instance" frameClassName="login-button-2" text={userProfile?.id ? userProfile?.id + "님" : "로그인"}/>

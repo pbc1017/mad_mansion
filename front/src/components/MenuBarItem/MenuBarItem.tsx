@@ -24,10 +24,10 @@ export const MenuBarItem = ({ className, elementClassName, text = "지도" }: Pr
       case '관심 목록':
         navigate('/wishlist');
         break;
-      case '내가 신청한 방':
-        navigate('/applyroom');
+      case '나의 맨션 관리':
+        navigate('/mymansion');
         break;
-      case '마이 페이지':
+      case '마이페이지':
         navigate('/mypage');
         break;
       default:
