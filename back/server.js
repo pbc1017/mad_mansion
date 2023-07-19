@@ -36,6 +36,7 @@ app.post('/api/login',async (req,res)=>{
 
 });
 
+
 app.post('/api/clickHeart',async (req,res)=>{
   try{
     console.log(req.body);
@@ -67,6 +68,7 @@ app.post('/api/clickHeart',async (req,res)=>{
   }
 
 });
+
 
 app.post('/api/map',async (req,res)=>{
   try {
@@ -241,6 +243,7 @@ app.post('/api/makePosting', async (req, res) => {
     const House = client.db('House').collection('house');
 
 
+
     const house = await House.find({id : req.body.placeId}).toArray();
     console.log(house);
     // 새로운 Posting 문서 생성
@@ -272,12 +275,14 @@ app.post('/api/makePosting', async (req, res) => {
   }
 });
 
+
 app.post('/api/getReceivedApply', async (req, res) => {
   //   서버  URL:  '/api/getReceivedApply'
 // 요청 방식: POST
 // req.body : {userId : "" }
 // 수행 Postings db의 apply collection의 state가 "waiting" && sender = req.body.userId인 apply들을 검색
 // res : 해당 apply들의 배열을 반환 
+
 
   try {
     // Establish a connection to the database
@@ -305,6 +310,7 @@ app.post('/api/getReceivedApply', async (req, res) => {
 
   }
 });
+
 
 app.post('/api/decidingApply', async (req, res) => {
   try {
@@ -350,7 +356,18 @@ app.post('/api/getDetail', async (req, res) => {
   finally {}
 })
 
-//input: {id : id}
+app.post('/api/getRandomThreeHouse', async (req, res) => {
+  try {
+    const House = client.db('House').collection('house');
+
+    // Retrieve a random sample of 3 documents from the House collection
+    const houseList = await House.aggregate([{ $sample: { size: 3 }}]).toArray();
+    
+    res.status(200).json(houseList);
+  } catch (error) {
+    res.status(500).json({ error: error.toString() });
+  }
+});
 
 app.post('/api/getMyMansion', async (req, res) => {
   try {
@@ -421,37 +438,36 @@ app.post('/api/getMyMansion', async (req, res) => {
   }
 })
 
-app.post('/api/getWishList', async(req, res) => {
-  try {
-          const userId = req.body.id;
-          
-          // Connect to the user collection
-          const userCollection = client.db('User').collection('user');
-          
-          // Find the user with the given ID and retrieve their wishList
-          const user = await userCollection.findOne({ id: userId });
-          const wishList = user.wishList;
-          
-          // Connect to the house collection
-          const houseCollection = client.db('House').collection('house');
-          
-          // Find the houses that match the IDs in the wishList
-          const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
-          
-          // Send the list of houses as the response
-          res.json(houses);
-      } catch (error) {
-          res.status(500).json({ error: error.toString() });
-      }
-  });
 
+app.post('/api/getWishList', async(req, res) => {
+try {
+        const userId = req.body.id;
+        
+        // Connect to the user collection
+        const userCollection = client.db('User').collection('user');
+        
+        // Find the user with the given ID and retrieve their wishList
+        const user = await userCollection.findOne({ id: userId });
+        const wishList = user.wishList;
+        
+        // Connect to the house collection
+        const houseCollection = client.db('House').collection('house');
+        
+        // Find the houses that match the IDs in the wishList
+        const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
+        
+        // Send the list of houses as the response
+        res.json(houses);
+    } catch (error) {
+        res.status(500).json({ error: error.toString() });
+    }
+});
 server.listen(80,main);
 
 //DB CODE
 
 const uri = "mongodb+srv://knsol2:1017@cluster0.ussb1gv.mongodb.net/?retryWrites=true&w=majority";
 //api key E2kpU7xTXiQrNi6WEWE6p1gNFC6dCpd4ZcMEuWHgsn0NHyc86dB3pGVSSwWED7Uz
-
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -465,4 +481,3 @@ function main() {
     //await collection.updateOne(QUERYDATA},{$set:{CHANGEDATA}})
     console.log("Server On");
 }
-

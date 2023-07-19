@@ -1,19 +1,21 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Card } from "components/Card";
 import { CardGrid } from "components/CardGrid";
 import { Header } from "components/Header";
 import { SearchBar } from "components/SearchBar";
 import { useLogin } from "contexts/LoginContext";
 import { useNavigate } from 'react-router-dom';
+import {House} from 'pages/Map/Map'
 import backgroundPng from "assets/images/background.png";
 import backgroundSvg from "assets/images/background.svg";
 import "./style.css";
+import { serverPost } from "utils/severPost";
 
 export const Home = (): JSX.Element => {
 
   const { setUserProfile } = useLogin();
   const navigate = useNavigate();
-
+  const [houseList, setHouseList] = useState<Array<House>>([]);
   useEffect(() => {
     const userProfile = window.localStorage.getItem('userProfile');
     if (userProfile) {
@@ -21,7 +23,20 @@ export const Home = (): JSX.Element => {
     }
   }, [setUserProfile]);
 
-  
+  useEffect(()=> {
+    let newHouseList : Array<House> = [];
+    serverPost("getRandomThreeHouse", {}).then((data: Array<House>) => {
+        // data.id 가 존재하는 경우에만 로그인을 수행
+        newHouseList = newHouseList.concat(data);
+        serverPost("getRandomThreeHouse", {}).then((data: Array<House>) => {
+        // data.id 가 존재하는 경우에만 로그인을 수행
+        newHouseList = newHouseList.concat(data);
+        setHouseList(newHouseList);
+        console.log(newHouseList);
+      });
+    });
+    
+  }, [])
 
   const handleSearchMessage = (data: string) => {
     navigate(`/map?query=${encodeURIComponent(data)}`);
@@ -60,30 +75,18 @@ export const Home = (): JSX.Element => {
               </div>
             </div>
             <div className="frame-8">
-            <CardGrid
-                cardAnonymousUser="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user-2.svg"
-                cardAnonymousUser1="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user-1.svg"
-                cardAnonymousUser2="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user.svg"
-                cardHeart="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart-2.svg"
-                cardHeart1="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart.svg"
-                cardImg="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart-1.svg"
-                cardText="현재 3명이 룸메 구하는 중"
-                cardText1="현재 3명이 룸메 구하는 중"
-                cardText2="현재 3명이 룸메 구하는 중"
-                className="card-grid-3"
+              <CardGrid 
+                className={"암거나"}
                 text=" 추천 매물"
+                house1={houseList[0]}
+                house2={houseList[1]}
+                house3={houseList[2]}
               />
               <CardGrid
-                cardAnonymousUser="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user-2.svg"
-                cardAnonymousUser1="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user-1.svg"
-                cardAnonymousUser2="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/anonymous-user.svg"
-                cardHeart="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart-2.svg"
-                cardHeart1="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart.svg"
-                cardImg="https://generation-sessions.s3.amazonaws.com/0627cb45cfa9c396bc157d60b09da0a5/img/heart-1.svg"
-                cardText="현재 1명 추가로 구하는 중"
-                cardText1="현재 1명 추가로 구하는 중"
-                cardText2="현재 1명 추가로 구하는 중"
-                className="card-grid-3"
+                className={"암거나"}
+                house1={houseList[3]}
+                house2={houseList[4]}
+                house3={houseList[5]}
                 text=" 모집이 얼마 남지 않은 방"
               />
             </div>
