@@ -262,7 +262,7 @@ export const Detail = (): JSX.Element => {
         )}  
         {isPostAddingModalOpen && (
           <div className="modal-container">
-            <PostingAddModal onClose={handleCloseAddModal}/>
+            <PostingAddModal onClose={handleCloseAddModal} placeId = {query? query : ''} />
           </div>
         )}
       </div>

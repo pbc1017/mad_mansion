@@ -14,19 +14,20 @@ const PostingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProp
     }
     const [text, setText] = useState<string>('');
     
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
       setText(value);
   };
 
   const onClickMakeApply = () => {
-    
-    const userProfileString = localStorage.getItem('getUserProfile');
+    const userProfileString = localStorage.getItem('userProfile');
+    console.log(userProfileString);
     if(userProfileString){
         const userProfile : UserProfile = JSON.parse(userProfileString);
-        serverPost("login", { sender: userProfile.id, postingId: Posting._id, content: text }).then((data: any) => {
+        console.log(userProfile);
+        serverPost("makeApply", { sender: userProfile.id, postingId: Posting._id, content: text }).then((data: any) => {
         // data.id 가 존재하는 경우에만 로그인을 수행
-        if (data.id) {
+        if (data._id) {
             userProfile.applyList.push(data._id);
             
             window.localStorage.setItem('userProfile', (JSON.stringify(userProfile)));  
@@ -54,7 +55,7 @@ const PostingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProp
         <div className="rectangle">{Posting.title}</div>
         <div className="rectangle-2">{Posting.content}</div>
         <div className="text-wrapper-6">간단한 자기소개</div>
-        <textarea className="rectangle-3" placeholder='여기에 소개를 입력하세요'/>
+        <textarea className="rectangle-3" placeholder='여기에 소개를 입력하세요' onChange={handleInputChange}/>
         <div className="text-wrapper-7" onClick={onClosePosting}>X</div>
       </div>
     </div>
