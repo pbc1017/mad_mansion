@@ -7,15 +7,15 @@ type ModalProps = {
   Posting: Posting
 };
 
-const Modal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProps) => {
+const postingViewModal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProps) => {
     const onClosePosting = ()=>{
         onClose(null);
     }
-    useEffect(() => {
-        console.log("제발..");
-    }, []);
+    // useEffect(() => {
+    //     console.log("제발..");
+    // }, []);
   return (
-    <div className="modal">
+    <div className="postingViewModal">
       <div className="div">
         <h1 className="text-wrapper">맨션 가입 신청하기</h1>
         <div className="text-wrapper-2">제목</div>
@@ -36,4 +36,4 @@ const Modal: React.FC<ModalProps> = ({ onClose, Posting } : ModalProps) => {
   );
 }
 
-export default Modal;
+export default postingViewModal;

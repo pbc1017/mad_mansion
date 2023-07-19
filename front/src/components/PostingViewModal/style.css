@@ -1,11 +1,11 @@
-.modal {
+.postingViewModal {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.modal .div {
+.postingViewModal .div {
     background-color: #ffffff;
     border: 1px none;
     height: 624px;
@@ -13,121 +13,121 @@
     width: 460px;
 }
 
-.modal .text-wrapper {
-    color: #000000;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 27px;
-    font-weight: 400;
-    left: 23px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 11px;
-    white-space: nowrap;
+.postingViewModal .text-wrapper {
+    color: #000000 !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 27px !important;
+    font-weight: 400 !important;
+    left: 23px !important;
+    letter-spacing: 0 !important;
+    line-height: normal !important;
+    position: absolute !important;
+    top: 11px !important;
+    white-space: nowrap !important;
 }
 
-.modal .text-wrapper-2 {
-    color: #ff7d7d;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    left: 23px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 87px;
-    white-space: nowrap;
+.postingViewModal .text-wrapper-2 {
+    color: #ff7d7d !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    left: 23px !important;
+    letter-spacing: 0 !important;
+    line-height: normal !important;
+    position: absolute !important;
+    top: 87px !important;
+    white-space: nowrap !important;
 }
 
-.modal .text-wrapper-3 {
-  color: #000000;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 15px;
-    font-weight: 400;
-    left: 313px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: right;
-    top: 66px;
-    white-space: nowrap;
+.postingViewModal .text-wrapper-3 {
+  color: #000000 !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    left: 313px !important;
+    letter-spacing: 0 !important;
+    line-height: normal !important;
+    position: absolute !important;
+    text-align: right !important;
+    top: 66px !important;
+    white-space: nowrap !important;
 }
 
-.modal .text-wrapper-4 {
-  color: #ff7d7d;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    left: 23px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 177px;
-    white-space: nowrap;
+.postingViewModal .text-wrapper-4 {
+  color: #ff7d7d !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    left: 23px !important;
+    letter-spacing: 0 !important;
+    line-height: normal !important;
+    position: absolute !important;
+    top: 177px !important;
+    white-space: nowrap !important;
 }
 
-.modal .frame {
-    background-color: #ff7d7d;
-    height: 66px;
-    left: 0;
-    position: absolute;
-    top: 558px;
-    width: 460px;
+.postingViewModal .frame {
+    background-color: #ff7d7d !important;
+    height: 66px !important;
+    left: 0 !important;
+    position: absolute !important;
+    top: 558px !important;
+    width: 460px !important;
 }
 
-.modal .text-wrapper-5 {
-    color: #ffffff;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 21px;
-    font-weight: 400;
-    height: 31px;
-    left: 113px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 18px;
-    width: 233px;
+.postingViewModal .text-wrapper-5 {
+    color: #ffffff !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    height: 31px !important;
+    left: 113px !important;
+    letter-spacing: 0 !important;
+    line-height: normal !important;
+    position: absolute !important;
+    text-align: center !important;
+    top: 18px !important;
+    width: 233px !important;
 }
 
-.modal .rectangle {
-    background: #ffffff;
-    height: 43px;
-    left: 24px;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 21px;
-    padding-top: 10px;
-    position: absolute;
-    top: 119px;
-    width: 405px;
+.postingViewModal .rectangle {
+    background: #ffffff !important;
+    height: 43px !important;
+    left: 24px !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 21px !important;
+    padding-top: 10px !important;
+    position: absolute !important;
+    top: 119px !important;
+    width: 405px !important;
 }
 
-.modal .rectangle-2 {
-    background: #ffffff;
-    height: 135px;
-    left: 23px;
-    font-size: 16px;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    line-height: 1.5;
-    position: absolute;
-    top: 209px;
-    width: 406px;
+.postingViewModal .rectangle-2 {
+    background: #ffffff !important;
+    height: 135px !important;
+    left: 23px !important;
+    font-size: 16px !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    line-height: 1.5 !important;
+    position: absolute !important;
+    top: 209px !important;
+    width: 406px !important;
 }
 
-.modal .text-wrapper-6 {
-    color: #ff7d7d;
-    font-family: "NanumBarunGothic-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    left: 23px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 365px;
-    white-space: nowrap;
+.postingViewModal .text-wrapper-6 {
+    color: #ff7d7d !important;
+    font-family: "NanumBarunGothic-Regular", Helvetica !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    left: 23px !important;
+    letter-spacing: 0 !important;
+    line-height: normal !important;
+    position: absolute !important;
+    top: 365px !important;
+    white-space: nowrap !important;
 }
 
-.modal .rectangle-3 {
+.postingViewModal .rectangle-3 {
     background: #f9f9f9;
     height: 127px;
     padding: 10px;
@@ -141,7 +141,7 @@
     border: none;
 }
 
-.modal .text-wrapper-7 {
+.postingViewModal .text-wrapper-7 {
     color: #d9d9d9;
     font-family: "NanumBarunGothic-Regular", Helvetica;
     font-size: 33px;
