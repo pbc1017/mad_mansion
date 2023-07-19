@@ -243,7 +243,7 @@ app.post('/api/makePosting', async (req, res) => {
     const House = client.db('House').collection('house');
 
 
-    const house = House.find({id : req.body.placeId});
+    const house = House.findOne({id : req.body.placeId});
 
     // 새로운 Posting 문서 생성
     const newPosting = {
@@ -257,12 +257,15 @@ app.post('/api/makePosting', async (req, res) => {
       receivedApplyList: []
     };
 
+    House.findOneAndUpdate({id : req.body.placeId},
+      { $push: { postingListList: newPosting._id.toString() } });
     // 새로운 Posting 문서 저장
     const result = await postings.insertOne(newPosting);
-    const a = await User.updateOne(
+    await User.updateOne(
             { id: newPosting.writer },
             { $push: { postingList: newPosting._id.toString() }}
         );
+    await 
     // 결과 반환
     console.log(newPosting);
     res.json(newPosting);
