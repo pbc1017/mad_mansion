@@ -356,6 +356,29 @@ app.post('/api/getDetail', async (req, res) => {
   finally {}
 })
 
+app.post('/api/getWishList', async(req, res) => {
+try {
+        const userId = req.body.id;
+        
+        // Connect to the user collection
+        const userCollection = client.db('User').collection('user');
+        
+        // Find the user with the given ID and retrieve their wishList
+        const user = await userCollection.findOne({ id: userId });
+        const wishList = user.wishList;
+        
+        // Connect to the house collection
+        const houseCollection = client.db('House').collection('house');
+        
+        // Find the houses that match the IDs in the wishList
+        const houses = await houseCollection.find({ id: { $in: wishList } }).toArray();
+        
+        // Send the list of houses as the response
+        res.json(houses);
+    } catch (error) {
+        res.status(500).json({ error: error.toString() });
+    }
+});
 server.listen(80,main);
 
 //DB CODE

@@ -4,7 +4,7 @@ import Home from './Home'
 import {Map} from '../pages/Map/Map'
 import { Detail } from 'pages/Detail'
 import { MyMansion } from 'pages/MyMansion'
-
+import {WishList} from 'pages/WishList'
 
 export default function RouteSetup() {
     return (
@@ -14,6 +14,7 @@ export default function RouteSetup() {
             <Route path= "/map" element = {<Map />}/>
             <Route path= "/detail" element = {<Detail/>}/>
             <Route path= "/mymansion" element = {<MyMansion/>}/>
+            <Route path= "/wishlist" element = {<WishList/>}/>
         </Routes>
     )
 }

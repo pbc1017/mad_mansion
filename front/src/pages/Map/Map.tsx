@@ -24,7 +24,7 @@ export type Info = {
   }
 }
 
-interface House {
+export type House = {
   _id: string;
   id: string;
   priceType: string;
