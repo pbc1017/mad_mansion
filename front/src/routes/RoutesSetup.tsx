@@ -11,7 +11,7 @@ export default function RouteSetup() {
         <Routes>
             <Route path= "/" element = {<Home/>}/>
             <Route path= "/login" element = {<Login/>}/>
-            <Route path= "/map" element = {<Map addressProp='' />}/>
+            <Route path= "/map" element = {<Map />}/>
             <Route path= "/detail" element = {<Detail/>}/>
             <Route path= "/mymansion" element = {<MyMansion/>}/>
         </Routes>

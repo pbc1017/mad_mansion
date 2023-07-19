@@ -71,21 +71,20 @@ function getSortedHouses(current_lat: number, current_lng: number, page: number,
 }
 
 
-export interface MapProps {
-    addressProp: string
-}
 
-export const Map = ({addressProp}: MapProps): JSX.Element => {
 
+export const Map = (): JSX.Element => {
+
+  const { search } = useLocation();
+  const query = new URLSearchParams(search).get('query');
   const { setUserProfile } = useLogin();
   const [info, setInfo] = useState<Info>();
   const [positions, setPositions] = useState<any>();
-  const [address, setAddresss] = useState<string>(addressProp);
+  const [address, setAddresss] = useState<string>(query? query : '');
   const [page, setPage] = useState<number>(1);
   const [houses, setHouses] = useState<House[]>([]);
   const [isNext, setNext] = useState<Boolean>(false);
-  const { search } = useLocation();
-  const query = new URLSearchParams(search).get('query');
+  
   
   const handleSetInfo = useCallback((data:Info) => {
     setInfo(data);

@@ -50,7 +50,7 @@ const PostingAddModal: React.FC<ModalProps> = ({ onClose, placeId }) => {
         <div className="text-wrapper-2">제목</div>
         <div className="text-wrapper-3">내용</div>
         <div className="frame">
-          <div className="text-wrapper-4">맨션 만들기</div>
+          <div className="text-wrapper-4" onClick={onClickMakeApply}>맨션 만들기</div>
         </div>
         <textarea className="rectangle" placeholder='여기에 제목을 입력하세요' onChange={handleTitleInputChange}/>
         <textarea className="rectangle-2" placeholder='여기에 내용을 입력하세요' onChange={handleContentInputChange}/>
