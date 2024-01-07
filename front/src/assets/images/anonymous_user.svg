@@ -1,0 +1,30 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="anonymous_user" clip-path="url(#clip0_174_127)">
+<g id="Clip path group">
+<mask id="mask0_174_127" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="20">
+<g id="avoid-antialiasing-bugs">
+<path id="Vector" d="M24 0H0V19.92H24V0Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_174_127)">
+<path id="Vector_2" d="M12 23.2C18.1856 23.2 23.2 18.1856 23.2 12C23.2 5.8144 18.1856 0.799988 12 0.799988C5.8144 0.799988 0.799988 5.8144 0.799988 12C0.799988 18.1856 5.8144 23.2 12 23.2Z" fill="#FF7D7D"/>
+</g>
+</g>
+<path id="Vector_3" d="M12 13.8C14.5405 13.8 16.6 11.7405 16.6 9.19998C16.6 6.65947 14.5405 4.59998 12 4.59998C9.45951 4.59998 7.40002 6.65947 7.40002 9.19998C7.40002 11.7405 9.45951 13.8 12 13.8Z" fill="white"/>
+<g id="Clip path group_2">
+<mask id="mask1_174_127" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<g id="circular-border">
+<path id="Vector_4" d="M12 23.2C18.1856 23.2 23.2 18.1856 23.2 12C23.2 5.8144 18.1856 0.799988 12 0.799988C5.8144 0.799988 0.799988 5.8144 0.799988 12C0.799988 18.1856 5.8144 23.2 12 23.2Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask1_174_127)">
+<path id="Vector_5" d="M12 30.2C16.5287 30.2 20.2 26.5287 20.2 22C20.2 17.4713 16.5287 13.8 12 13.8C7.47125 13.8 3.79999 17.4713 3.79999 22C3.79999 26.5287 7.47125 30.2 12 30.2Z" fill="white"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_174_127">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

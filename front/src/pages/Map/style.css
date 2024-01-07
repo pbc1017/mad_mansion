@@ -1,0 +1,97 @@
+html, body {margin: 0px; padding: 0px;}
+
+.map {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.map .div-2 {
+  background-color: #f5f5f5;
+  border: 1px none;
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+}
+
+.map .overlap {
+  background-position: 50% 50%;
+  background-size: cover;
+  height: calc(100vh - 141px);
+  left: 0;
+  position: absolute;
+  top: 141px;
+  width: 100vw;
+}
+
+.map .text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  left: 15px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 7px;
+}
+
+.map .search-bar {
+  height: 50px !important;
+  width: 87vw;
+  left: 6vw !important;
+  position: absolute !important;
+  top: 30px; /* Adjusted to match the top position of overlap */
+  right: 3vw; /* Added */
+  z-index: 100; /* Added to ensure the SearchBar is above the map */
+}
+
+.map .frame-8 {
+  z-index: 100;
+  align-items: center;
+  display: flex;
+  gap: 18px;
+  position: absolute;
+  bottom: 1vh;
+  width: 100vw;
+}
+.map .frame-cards {
+  align-items: flex-start;
+  display: flex;
+  gap: 1vw;
+  left: 5vw;
+  position: absolute;
+  bottom: 1vh;
+  width: 92vw;
+}
+
+.map .card-instance {
+  width: 12vw !important;
+  position: relative !important;
+  margin-right: auto;
+}
+
+.map .header-instance {
+  left: 0 !important;
+  mix-blend-mode: normal !important;
+  position: absolute !important;
+  top: 3px !important;
+}
+
+.map .prev-wrapper {
+  position: absolute;
+  left:2.5vw;
+  width: 0.5vw;
+  bottom:10vh;
+}
+
+.map .next-wrapper {
+  position: absolute;
+  left:96.5vw;
+  width: 0.5vw;
+  bottom:10vh;
+}

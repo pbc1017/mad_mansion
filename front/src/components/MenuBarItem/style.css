@@ -1,0 +1,20 @@
+.menu-bar-item {
+  background-color: #ffffff;
+  height: 28px;
+  position: relative;
+  width: 121px;
+}
+
+.menu-bar-item .element {
+  color: #000000;
+  font-family: "NanumBarunGothic-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 45px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  white-space: nowrap;
+}

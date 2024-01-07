@@ -1,0 +1,54 @@
+.manshion-view {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  width: fit-content;
+}
+
+.manshion-view .rectangle-2 {
+  background-color: #ffffff;
+  height: 701px;
+  width: 40vw;
+  position: relative;
+}
+
+.manshion-view .frame-3 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  left: 51px;
+  position: absolute;
+  top: 56px;
+  width: fit-content;
+}
+
+.manshion-view .element-7 {
+  color: #000000;
+  font-family: "NanumBarunGothic-Bold", Helvetica;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.manshion-view .element-8 {
+  color: #ff7d7d;
+  font-family: "NanumBarunGothic-Regular", Helvetica;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.manshion-view .mansion-list-instance {
+  width: 35vw !important;
+}

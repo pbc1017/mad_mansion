@@ -1,0 +1,66 @@
+.header {
+  background-color: #ffffff;
+  height: 138px;
+  position: relative;
+  width: 100vw; /* Converted from 1512px */
+}
+
+.header .login-logo {
+  height: 105px;
+  left: 1.59vw; /* Converted from 24px */
+  position: absolute;
+  top: 17px;
+  width: 6.62vw; /* Converted from 100px */
+}
+
+.header .div {
+  align-items: flex-start;
+  display: flex;
+  height: 28px;
+  justify-content: space-between;
+  left: 20.38vw; /* Converted from 307px */
+  position: absolute;
+  top: 88px;
+  width: 59.42vw; /* Converted from 897px */
+}
+
+.header .menu-bar-item-instance {
+  min-width: 121px !important;
+  width: unset !important;
+}
+
+.header .design-component-instance-node {
+  left: 1.79vw !important; /* Converted from 27px */
+}
+
+.header .menu-bar-item-2 {
+  left: 0.59vw !important; /* Converted from 9px */
+}
+
+.header .menu-bar-item-3 {
+  left: 1.26vw !important; /* Converted from 19px */
+}
+
+.header .frame-2 {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  left: 87.07vw; /* Converted from 1315px */
+  position: absolute;
+  top: 18px;
+  width: fit-content;
+}
+
+.header .login-button-instance {
+  min-width: 85px !important;
+  position: relative !important;
+  width: unset !important;
+}
+
+.header .login-button-2 {
+  width: 5.63vw !important; /* Converted from 85px */
+}
+
+.header .login-button-3 {
+  left: 1.06vw !important; /* Converted from 16px */
+}

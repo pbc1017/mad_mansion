@@ -1,0 +1,37 @@
+.wish-list {
+  height: 955px;
+  position: relative;
+  width: 1512px;
+}
+
+.wish-list .overlap-group {
+  background-color: #d9d9d9fc;
+  height: 955px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1512px;
+}
+
+.wish-list .rectangle {
+  background-color: #ffffff;
+  height: 780px;
+  left: 162px;
+  position: absolute;
+  top: 175px;
+  width: 1114px;
+}
+
+.wish-list .element {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 35px;
+  font-weight: 400;
+  height: 87px;
+  left: 295px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 188px;
+  width: 259px;
+}

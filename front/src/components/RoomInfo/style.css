@@ -1,0 +1,48 @@
+.room-info {
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+  border-color: #a2a2a2;
+  height: 84px;
+  position: relative;
+  width: 30vw;
+}
+
+.room-info .element-2 {
+  color: #000000;
+  font-family: "NanumBarunGothic-Bold", Helvetica;
+  font-size: 21px;
+  font-weight: 700;
+  left: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 16px;
+  white-space: nowrap;
+}
+
+.room-info .element-3 {
+  color: #000000;
+  font-family: "NanumBarunGothic-Bold", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  left: 17vw;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 52px;
+  white-space: nowrap;
+}
+
+.room-info .pbc {
+  color: #000000;
+  font-family: "NanumBarunGothic-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 52px;
+  white-space: nowrap;
+}

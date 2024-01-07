@@ -1,0 +1,30 @@
+.search-bar {
+  align-items: center;
+  background-color: #ffffff;
+  display: flex;
+  gap: 24px;
+  padding: 0px 13px;
+  position: relative;
+  width: 77vw;
+}
+
+.search-bar .icon-search {
+  height: 30px;
+  min-width: 30px;
+  position: relative;
+}
+
+.search-bar .element-5 {
+  color: black;
+  font-family: "NanumBarunGothic-Light", Helvetica;
+  font-size: 23px;
+  font-weight: 300;
+  height: 29px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: 1230px;
+  border: none;
+  outline: none;
+}
+

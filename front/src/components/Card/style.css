@@ -1,0 +1,125 @@
+.card {
+  background-color: #ffffff;
+  height: 30vh;
+  width: 12vw;
+}
+
+.card .overlap-group {
+  height: 17vh;
+  left: 1vw;
+  position: relative;
+  top: 19px;
+  width: 13vw;
+}
+
+.card .frame-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+}
+
+.card .rectangle {
+  background-color: #d9d9d9;
+  height: 14vh;
+  width: 10vw;
+  position: relative;
+}
+
+.card .frame-4 {
+  display: flex;
+  gap: 19px;
+  position: relative;
+  width: fit-content;
+}
+
+.card .element-2 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 1.02vw;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.card .element-wrapper {
+  height: 2.13vh;
+  width: 3vw;
+  left: 7.5vw;
+  position: absolute;
+}
+
+.card .element-m {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 1.02vw;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: -1px;
+}
+
+.card .element-3 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 1.02vw;
+  font-weight: 400;
+  letter-spacing: 0;
+  display: inline-block;
+  width: 10vw;
+  line-height: normal;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card .frame-5 {
+  display: flex;
+  gap: 7px;
+  position: relative;
+  width: 12vw;
+}
+
+.card .anonymous-user {
+  top: -3px;
+  height: 1.6vw;
+  width: 1.6vw;
+  position: relative;
+}
+
+.card .p {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 0.7vw;
+  font-weight: 400;
+  letter-spacing: 0;
+  top: -1vh;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.card .heart {
+  height: 21px;
+  left: 8vw;
+  position: absolute;
+  top: 5px;
+  width: 2vw;
+}
+
+.card .logo {
+  position: relative;
+  margin-top: 25%;
+  margin-left: 25%;
+  height: 50%;
+  width: 50%
+}

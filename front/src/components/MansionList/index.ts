@@ -1,0 +1,1 @@
+export { MansionList } from "./MansionList";
